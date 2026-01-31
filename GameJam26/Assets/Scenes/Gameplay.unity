@@ -501,6 +501,10 @@ PrefabInstance:
       propertyPath: knockbackUpForce
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 265142872490906172, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
+      propertyPath: blockKnockbackReduction
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 1423733728754527179, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.402
@@ -1800,6 +1804,10 @@ PrefabInstance:
     - target: {fileID: 265142872490906172, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
       propertyPath: knockbackUpForce
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 265142872490906172, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
+      propertyPath: blockKnockbackReduction
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1423733728754527179, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
       propertyPath: m_LocalScale.x
