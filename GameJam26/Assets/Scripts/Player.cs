@@ -93,6 +93,7 @@ public class Player : MonoBehaviour
     private bool isCrouching;
     private bool isDashing;
     private bool canDash = true;
+    private bool hasUsedAirDash = false; // Solo un air dash por salto
 
     // Variables para doble tap (dash)
     private float lastTapTimeLeft;
@@ -165,7 +166,14 @@ public class Player : MonoBehaviour
 
     private void CheckGrounded()
     {
+        bool wasGrounded = isGrounded;
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        
+        // Resetear air dash cuando toca el suelo
+        if (isGrounded && !wasGrounded)
+        {
+            hasUsedAirDash = false;
+        }
     }
 
     private void HandleInput()
@@ -342,7 +350,11 @@ public class Player : MonoBehaviour
 
     private void HandleDoubleTapDash()
     {
-        if (!isGrounded || isBlocking || !canDash) return;
+        // Puede hacer dash en el suelo o en el aire, pero no mientras bloquea
+        if (isBlocking || !canDash) return;
+        
+        // En el aire, solo puede hacer un dash por salto
+        if (!isGrounded && hasUsedAirDash) return;
 
         // Usar nuevo Input System si está activo
         if (useNewInputSystem && inputHandler != null)
@@ -413,7 +425,7 @@ public class Player : MonoBehaviour
         PlayerAttack playerAttack = GetComponent<PlayerAttack>();
         if (playerAttack != null && playerAttack.IsAttacking)
         {
-            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            rb.linearVelocity = Vector2.zero;
             return;
         }
 
@@ -474,6 +486,12 @@ public class Player : MonoBehaviour
         isDashing = true;
         canDash = false;
         currentState = PlayerState.Dashing;
+        
+        // Marcar que usó el air dash si está en el aire
+        if (!isGrounded)
+        {
+            hasUsedAirDash = true;
+        }
 
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0;
