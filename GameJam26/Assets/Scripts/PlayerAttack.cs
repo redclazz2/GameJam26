@@ -3,12 +3,13 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     [Header("Attack Settings")]
-    [SerializeField] private float meleeAttackCooldownDefault = 0.2f;
+    [SerializeField] private float meleeAttackCooldownDefault = 0.05f;
     [SerializeField] private GameObject meleeAttack;
 
     private float meleeAttackCooldown;
     private Transform playerTransform;
     private Player playerComponent;
+    private KeyCode keyMeleeToCheck;
     void Start()
     {
         if (meleeAttack == null)
@@ -22,6 +23,7 @@ public class PlayerAttack : MonoBehaviour
 
         playerTransform = transform;
         meleeAttackCooldown = 0f;
+        keyMeleeToCheck = playerComponent.PlayerNumber == 1 ? KeyCode.E : KeyCode.M;
     }
 
     void Update()
@@ -29,9 +31,9 @@ public class PlayerAttack : MonoBehaviour
         if (meleeAttackCooldown > 0f)
             meleeAttackCooldown -= Time.deltaTime;
 
-        if (meleeAttackCooldown <= 0f && Input.GetKeyDown(KeyCode.X))
+        if (meleeAttackCooldown <= 0f && Input.GetKeyDown(keyMeleeToCheck))
         {
-            float offset = playerComponent.FacingDirection == 1 ? 1f : -1f;
+            float offset = playerComponent.FacingDirection == 1 ? 3f : -3f;
 
             Vector3 spawnPosition = new Vector3(
                 playerTransform.position.x + offset,

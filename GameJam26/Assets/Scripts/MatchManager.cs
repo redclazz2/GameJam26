@@ -11,7 +11,7 @@ public class MatchManager : MonoBehaviour
     [SerializeField] private Player player2;
 
     [Header("Configuración de Partida")]
-    [SerializeField] private float roundTime = 120f; // 2 minutos
+    [SerializeField] private float roundTime = 100f; // 2 minutos
     [SerializeField] private int pointsToWin = 3;
 
     [Header("Estado Actual")]
