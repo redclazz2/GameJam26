@@ -46,26 +46,24 @@ public class PlayerAttack : MonoBehaviour
         if (!Input.GetKeyDown(keyMeleeToCheck))
             return;
 
-        // ⬆️ UP ATTACK (highest priority!)
+        // ⬆️ UP ATTACK (priority)
         if (!playerComponent.IsGrounded())
         {
             SpawnUpAttack();
             return;
         }
 
-        // 💥💥 DOUBLE TAP = LONG ATTACK
-        if (waitingForSecondTap && Time.time - lastAttackTapTime <= doubleTapAttackTime)
+        // 💥 DOUBLE TAP
+        if (Time.time - lastAttackTapTime <= doubleTapAttackTime)
         {
             SpawnLongAttack();
-            waitingForSecondTap = false;
+            lastAttackTapTime = 0f;
             return;
         }
 
-        // 💥 FIRST TAP
+        // 💥 INSTANT BASIC ATTACK
+        SpawnMeleeAttack();
         lastAttackTapTime = Time.time;
-        waitingForSecondTap = true;
-
-        Invoke(nameof(ResolveSingleTap), doubleTapAttackTime);
     }
 
 
