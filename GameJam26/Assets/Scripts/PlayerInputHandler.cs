@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Haptics;
 
 /// <summary>
 /// Componente que maneja el input del jugador usando el nuevo Input System.
@@ -302,5 +303,85 @@ public class PlayerInputHandler : MonoBehaviour
             return "Esperando input...";
         
         return $"{assignedDevice.displayName} ({assignedScheme})";
+    }
+
+    /// <summary>
+    /// Activa la vibración del mando si el dispositivo soporta rumble
+    /// </summary>
+    /// <param name="lowFrequency">Vibración del motor izquierdo (graves) 0-1</param>
+    /// <param name="highFrequency">Vibración del motor derecho (agudos) 0-1</param>
+    /// <param name="duration">Duración de la vibración en segundos</param>
+    public void TriggerRumble(float lowFrequency, float highFrequency, float duration)
+    {
+        if (!hasDevice || assignedDevice == null)
+            return;
+
+        // Usar la interfaz IDualMotorRumble que es más compatible
+        if (assignedDevice is IDualMotorRumble rumbleDevice)
+        {
+            StartCoroutine(RumbleCoroutine(rumbleDevice, lowFrequency, highFrequency, duration));
+        }
+        else if (showDebugLogs)
+        {
+            Debug.LogWarning($"[PlayerInputHandler] El dispositivo '{assignedDevice.displayName}' ({assignedDevice.GetType().Name}) no soporta vibración IDualMotorRumble");
+        }
+    }
+
+    /// <summary>
+    /// Vibración preset para cuando el jugador RECIBE daño (fuerte)
+    /// </summary>
+    public void RumbleOnDamageTaken()
+    {
+        TriggerRumble(0.8f, 0.6f, 0.15f);
+    }
+
+    /// <summary>
+    /// Vibración preset para cuando el jugador HACE daño (suave)
+    /// </summary>
+    public void RumbleOnDamageDealt()
+    {
+        TriggerRumble(0.3f, 0.2f, 0.08f);
+    }
+
+    /// <summary>
+    /// Vibración preset para cuando el ataque es BLOQUEADO
+    /// </summary>
+    public void RumbleOnBlocked()
+    {
+        TriggerRumble(0.5f, 0.4f, 0.1f);
+    }
+
+    private System.Collections.IEnumerator RumbleCoroutine(IDualMotorRumble rumbleDevice, float lowFreq, float highFreq, float duration)
+    {
+        rumbleDevice.SetMotorSpeeds(lowFreq, highFreq);
+        yield return new WaitForSecondsRealtime(duration);
+        rumbleDevice.SetMotorSpeeds(0f, 0f);
+    }
+
+    /// <summary>
+    /// Debug: Muestra información sobre las capacidades del dispositivo
+    /// </summary>
+    public void DebugDeviceCapabilities()
+    {
+        if (assignedDevice == null)
+        {
+            Debug.Log("[PlayerInputHandler] No hay dispositivo asignado");
+            return;
+        }
+
+        Debug.Log($"[PlayerInputHandler] === Info del Dispositivo ===");
+        Debug.Log($"  Nombre: {assignedDevice.displayName}");
+        Debug.Log($"  Tipo: {assignedDevice.GetType().FullName}");
+        Debug.Log($"  Es Gamepad: {assignedDevice is Gamepad}");
+        Debug.Log($"  Soporta IDualMotorRumble: {assignedDevice is IDualMotorRumble}");
+        Debug.Log($"  Soporta IHaptics: {assignedDevice is IHaptics}");
+        
+        // Listar todas las interfaces implementadas
+        var interfaces = assignedDevice.GetType().GetInterfaces();
+        Debug.Log($"  Interfaces ({interfaces.Length}):");
+        foreach (var iface in interfaces)
+        {
+            Debug.Log($"    - {iface.Name}");
+        }
     }
 }
