@@ -323,6 +323,9 @@ MonoBehaviour:
   health: 100
   damage: 12
   maxHealth: 100
+  knockbackForce: 8
+  knockbackUpForce: 3
+  hitstunDuration: 0.2
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
@@ -337,6 +340,7 @@ MonoBehaviour:
   jumpForce: 22
   fallMultiplier: 5
   lowJumpMultiplier: 2
+  fastFallForce: 15
   dashSpeed: 16
   dashDuration: 0.25
   dashCooldown: 0.4
@@ -363,4 +367,4 @@ MonoBehaviour:
   meleeAttack: {fileID: 5896437435647391897, guid: 726bd21db3de058ee97a836e0992cc27, type: 3}
   longAttack: {fileID: 5896437435647391897, guid: f4501bb2f9ace5c2a8b505b4d821deae, type: 3}
   upAttack: {fileID: 5896437435647391897, guid: 9b5f611b7539be1e0b3e1785a0925da2, type: 3}
-  doubleTapAttackTime: 0.19
+  doubleTapAttackTime: 0.18
