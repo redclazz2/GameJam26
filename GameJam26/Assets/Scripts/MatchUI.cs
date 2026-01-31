@@ -33,6 +33,9 @@ public class MatchUI : MonoBehaviour
     [SerializeField] private GameObject matchEndPanel;
     [SerializeField] private TextMeshProUGUI matchEndText;
 
+    [Header("Countdown")]
+    [SerializeField] private TextMeshProUGUI countdownText;
+
     private MatchManager matchManager;
 
     private void Start()
@@ -51,6 +54,7 @@ public class MatchUI : MonoBehaviour
         matchManager.OnRoundEnd.AddListener(ShowRoundEnd);
         matchManager.OnMatchEnd.AddListener(ShowMatchEnd);
         matchManager.OnRoundStart.AddListener(HideEndPanels);
+        matchManager.OnCountdownChanged.AddListener(UpdateCountdown);
 
         // Suscribirse a eventos de salud de los jugadores
         if (player1 != null)
@@ -89,6 +93,30 @@ public class MatchUI : MonoBehaviour
             {
                 timerText.color = Color.white;
             }
+        }
+    }
+
+    private void UpdateCountdown(string countdownValue)
+    {
+        if (countdownText == null) return;
+
+        if (string.IsNullOrEmpty(countdownValue))
+        {
+            countdownText.gameObject.SetActive(false);
+            
+            // Mostrar el timer cuando termina el countdown
+            if (timerText != null)
+            {
+                timerText.gameObject.SetActive(true);
+            }
+        }
+        else
+        {
+            countdownText.gameObject.SetActive(true);
+            countdownText.text = countdownValue;
+
+            // Color especial para "GO!"
+            countdownText.color = countdownValue == "GO!" ? Color.green : Color.white;
         }
     }
 
@@ -190,10 +218,10 @@ public class MatchUI : MonoBehaviour
             matchEndPanel.SetActive(false);
         }
 
-        // Mostrar y resetear color del timer
+        // Ocultar timer durante el countdown (se mostrará cuando termine)
         if (timerText != null)
         {
-            timerText.gameObject.SetActive(true);
+            timerText.gameObject.SetActive(false);
             timerText.color = Color.white;
         }
     }
@@ -216,6 +244,7 @@ public class MatchUI : MonoBehaviour
             matchManager.OnRoundEnd.RemoveListener(ShowRoundEnd);
             matchManager.OnMatchEnd.RemoveListener(ShowMatchEnd);
             matchManager.OnRoundStart.RemoveListener(HideEndPanels);
+            matchManager.OnCountdownChanged.RemoveListener(UpdateCountdown);
         }
     }
 }

@@ -375,7 +375,7 @@ public class Player : MonoBehaviour
     public void SetMovementEnabled(bool enabled)
     {
         this.enabled = enabled;
-        if (!enabled)
+        if (!enabled && rb != null)
         {
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
         }
