@@ -371,10 +371,18 @@ public class Player : MonoBehaviour
     public bool IsDashing() => isDashing;
     public PlayerState GetCurrentState() => currentState;
     
-    // Método para deshabilitar movimiento (útil durante ataques)
+    // Método para deshabilitar movimiento y ataques (útil durante countdown, fin de ronda, etc.)
     public void SetMovementEnabled(bool enabled)
     {
         this.enabled = enabled;
+        
+        // También deshabilitar/habilitar el ataque
+        PlayerAttack playerAttack = GetComponent<PlayerAttack>();
+        if (playerAttack != null)
+        {
+            playerAttack.enabled = enabled;
+        }
+        
         if (!enabled && rb != null)
         {
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
