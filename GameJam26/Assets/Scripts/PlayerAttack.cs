@@ -1,57 +1,58 @@
 using System;
 using UnityEngine;
 
-public enum FacingDirection
-{
-    Right,
-    Left
-}
-
 public class PlayerAttack : MonoBehaviour
 {
     private Transform playerTransform;
+    private Player playerComponent;
 
-    [SerializeField]
-    public const float meleeAttackCooldownDefault = 1;
+    [Header("Attack Settings")]
+    [SerializeField] private float meleeAttackCooldownDefault = 1f;
+    [SerializeField] private GameObject meleeAttack;
 
-    [SerializeField]
-    public FacingDirection facingDirection = FacingDirection.Right;
-
-    [SerializeField]
-    public float meleeAttackCooldown = 0f;
-
-    [SerializeField]
-    public GameObject meleeAttack;
+    [Header("State")]
+    [SerializeField] private FacingDirection facingDirection = FacingDirection.Right;
+    private float meleeAttackCooldown;
 
     void Start()
     {
         if (meleeAttack == null)
         {
-            throw new ArgumentNullException("Attack GameObject is Empty! Configure from inspector!");
+            Debug.LogError("Attack GameObject is Empty! Configure from inspector!");
+            enabled = false;
+            return;
         }
 
-        playerTransform = gameObject.GetComponent<Transform>();
+        playerComponent = gameObject.GetComponent<Player>();
+
+        playerTransform = transform;
+        meleeAttackCooldown = 0f;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (meleeAttackCooldown > 0 && Input.GetKey(KeyCode.X))
+        // cooldown ticks every frame
+        if (meleeAttackCooldown > 0f)
         {
-            var attackSpawnDirectionOffSet =
-                facingDirection == FacingDirection.Right ? 10 : -10;
-            var attackSpawnPosition = new Vector3(
-                playerTransform.position.x + attackSpawnDirectionOffSet,
+            meleeAttackCooldown -= Time.deltaTime;
+        }
+
+        // attack only on key press
+        if (meleeAttackCooldown <= 0f && Input.GetKeyDown(KeyCode.X))
+        {
+
+
+            float offset = playerComponent.FacingDirection == 1 ? 1f : -1f;
+                        Debug.Log(playerComponent.FacingDirection);
+            Vector3 spawnPosition = new Vector3(
+                playerTransform.position.x + offset,
                 playerTransform.position.y,
                 playerTransform.position.z
             );
-            Instantiate(meleeAttack, attackSpawnPosition, playerTransform.rotation);
+
+            Instantiate(meleeAttack, spawnPosition, Quaternion.identity);
 
             meleeAttackCooldown = meleeAttackCooldownDefault;
-        }
-        else
-        {
-            meleeAttackCooldown -= 0.1f;
         }
     }
 }

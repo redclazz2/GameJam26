@@ -1,11 +1,20 @@
 using UnityEngine;
 
-public class Movement : MonoBehaviour
+public enum FacingDirection
+{
+    Right,
+    Left
+}
+
+public class Player : MonoBehaviour
 {
     [Header("Componentes")]
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+
+    [Header("Stats")]
+    [SerializeField] private float health = 100f;
 
     [Header("Movimiento")]
     [SerializeField] private float walkSpeed = 5f;
