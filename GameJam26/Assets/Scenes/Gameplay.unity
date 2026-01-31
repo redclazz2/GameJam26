@@ -501,10 +501,6 @@ PrefabInstance:
       propertyPath: knockbackUpForce
       value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 265142872490906172, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
-      propertyPath: blockKnockbackReduction
-      value: 0.2
-      objectReference: {fileID: 0}
     - target: {fileID: 1423733728754527179, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.402
@@ -855,7 +851,7 @@ Transform:
   m_GameObject: {fileID: 865608995}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.15, y: 1.46, z: 0}
+  m_LocalPosition: {x: 0.15, y: 1.46, z: 2.36}
   m_LocalScale: {x: 2.3551095, y: 2.3551095, z: 2.3551095}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1895,10 +1891,6 @@ PrefabInstance:
     - target: {fileID: 265142872490906172, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
       propertyPath: knockbackUpForce
       value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 265142872490906172, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
-      propertyPath: blockKnockbackReduction
-      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1423733728754527179, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
       propertyPath: m_LocalScale.x
