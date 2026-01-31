@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum FacingDirection
 {
@@ -8,6 +9,10 @@ public enum FacingDirection
 
 public class Player : MonoBehaviour
 {
+    [Header("Identificación")]
+    [SerializeField] private int playerNumber = 1; // 1 = Jugador 1 (WASD), 2 = Jugador 2 (Flechas)
+    public int PlayerNumber => playerNumber;
+
     [Header("Componentes")]
     private Rigidbody2D rb;
     private Animator animator;
@@ -16,6 +21,18 @@ public class Player : MonoBehaviour
     [Header("Stats")]
     [SerializeField] private float health = 100f;
     [SerializeField] private float damage = 10f;
+    [SerializeField] private float maxHealth = 100f;
+    private float currentHealth;
+
+    // Eventos para el sistema de combate
+    public UnityEvent OnDeath;
+    public UnityEvent<float> OnHealthChanged; // Pasa la salud actual
+    public UnityEvent<float> OnDamageTaken; // Pasa el daño recibido
+
+    // Propiedades públicas para el sistema de salud
+    public float CurrentHealth => currentHealth;
+    public float MaxHealth => maxHealth;
+    public bool IsDead => currentHealth <= 0;
 
     [Header("Movimiento")]
     [SerializeField] private float walkSpeed = 5f;
@@ -64,6 +81,14 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
+        // Inicializar eventos si son null
+        OnDeath ??= new UnityEvent();
+        OnHealthChanged ??= new UnityEvent<float>();
+        OnDamageTaken ??= new UnityEvent<float>();
+
+        // Inicializar salud
+        currentHealth = maxHealth;
+
         // Configurar Rigidbody2D
         if (rb != null)
         {
@@ -108,13 +133,33 @@ public class Player : MonoBehaviour
 
     private void HandleInput()
     {
-        // Input horizontal
-        horizontalInput = Input.GetAxisRaw("Horizontal");
+        // Input horizontal según el jugador
+        if (playerNumber == 1)
+        {
+            // Jugador 1: WASD
+            if (Input.GetKey(KeyCode.A))
+                horizontalInput = -1f;
+            else if (Input.GetKey(KeyCode.D))
+                horizontalInput = 1f;
+            else
+                horizontalInput = 0f;
+        }
+        else
+        {
+            // Jugador 2: Flechas
+            if (Input.GetKey(KeyCode.LeftArrow))
+                horizontalInput = -1f;
+            else if (Input.GetKey(KeyCode.RightArrow))
+                horizontalInput = 1f;
+            else
+                horizontalInput = 0f;
+        }
 
         // Agacharse (solo en el suelo)
         if (isGrounded)
         {
-            if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+            bool crouchKey = playerNumber == 1 ? Input.GetKey(KeyCode.S) : Input.GetKey(KeyCode.DownArrow);
+            if (crouchKey)
             {
                 isCrouching = true;
                 horizontalInput = 0; // No moverse mientras está agachado
@@ -126,8 +171,11 @@ public class Player : MonoBehaviour
         }
 
         // Salto (solo si está en el suelo y no agachado)
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) 
-            && isGrounded && !isCrouching)
+        bool jumpKey = playerNumber == 1 
+            ? (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space))
+            : Input.GetKeyDown(KeyCode.UpArrow);
+        
+        if (jumpKey && isGrounded && !isCrouching)
         {
             Jump();
         }
@@ -147,8 +195,12 @@ public class Player : MonoBehaviour
     {
         if (!isGrounded || isCrouching || !canDash) return;
 
+        // Teclas según jugador
+        KeyCode rightKey = playerNumber == 1 ? KeyCode.D : KeyCode.RightArrow;
+        KeyCode leftKey = playerNumber == 1 ? KeyCode.A : KeyCode.LeftArrow;
+
         // Detectar doble tap derecha
-        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(rightKey))
         {
             if (waitingForDoubleTapRight && Time.time - lastTapTimeRight < doubleTapTime)
             {
@@ -163,7 +215,7 @@ public class Player : MonoBehaviour
         }
 
         // Detectar doble tap izquierda
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(leftKey))
         {
             if (waitingForDoubleTapLeft && Time.time - lastTapTimeLeft < doubleTapTime)
             {
@@ -220,9 +272,16 @@ public class Player : MonoBehaviour
             rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
         }
         // Salto corto si sueltas el botón de salto
-        else if (rb.linearVelocity.y > 0 && !Input.GetKey(KeyCode.Space) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.UpArrow))
+        else if (rb.linearVelocity.y > 0)
         {
-            rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
+            bool holdingJump = playerNumber == 1 
+                ? (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Space))
+                : Input.GetKey(KeyCode.UpArrow);
+            
+            if (!holdingJump)
+            {
+                rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
+            }
         }
     }
 
@@ -322,13 +381,62 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float damage)
-    {
-        health -= damage;
-    }
-
     public float GetDamage()
     {
         return damage;
+    }
+    /// <summary>
+    /// Aplica daño al jugador
+    /// </summary>
+    public void TakeDamage(float damage)
+    {
+        if (IsDead) return;
+
+        currentHealth -= damage;
+        currentHealth = Mathf.Max(0, currentHealth);
+        
+        OnDamageTaken?.Invoke(damage);
+        OnHealthChanged?.Invoke(currentHealth);
+
+        Debug.Log($"{gameObject.name} recibió {damage} de daño. Salud: {currentHealth}/{maxHealth}");
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    /// <summary>
+    /// Cura al jugador
+    /// </summary>
+    public void Heal(float amount)
+    {
+        if (IsDead) return;
+
+        currentHealth += amount;
+        currentHealth = Mathf.Min(currentHealth, maxHealth);
+        
+        OnHealthChanged?.Invoke(currentHealth);
+    }
+
+    /// <summary>
+    /// Resetea la salud al máximo
+    /// </summary>
+    public void ResetHealth()
+    {
+        currentHealth = maxHealth;
+        OnHealthChanged?.Invoke(currentHealth);
+    }
+
+    /// <summary>
+    /// Llamado cuando el jugador muere
+    /// </summary>
+    private void Die()
+    {
+        Debug.Log($"{gameObject.name} ha muerto!");
+        OnDeath?.Invoke();
+        
+        // Deshabilitar movimiento al morir
+        SetMovementEnabled(false);
     }
 }
