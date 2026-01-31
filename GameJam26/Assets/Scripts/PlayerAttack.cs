@@ -12,6 +12,9 @@ public class PlayerAttack : MonoBehaviour
     [Header("Advanced Attack Settings")]
     [SerializeField] private float doubleTapAttackTime = 0.25f;
 
+    [Header("Input System")]
+    [SerializeField] private bool useNewInputSystem = true;
+
     private float lastAttackTapTime;
     private bool waitingForSecondTap;
     private bool isAttacking = false;
@@ -23,6 +26,7 @@ public class PlayerAttack : MonoBehaviour
     private float meleeAttackCooldown;
     private Transform playerTransform;
     private Player playerComponent;
+    private PlayerInputHandler inputHandler;
     private KeyCode keyMeleeToCheck;
     void Start()
     {
@@ -34,6 +38,14 @@ public class PlayerAttack : MonoBehaviour
         }
 
         playerComponent = gameObject.GetComponent<Player>();
+        inputHandler = gameObject.GetComponent<PlayerInputHandler>();
+
+        // Verificar si se usa el nuevo Input System
+        if (useNewInputSystem && inputHandler == null)
+        {
+            Debug.LogWarning("PlayerAttack: useNewInputSystem está activo pero no hay PlayerInputHandler. Usando input legacy.");
+            useNewInputSystem = false;
+        }
 
         playerTransform = transform;
         meleeAttackCooldown = 0f;
@@ -52,7 +64,18 @@ public class PlayerAttack : MonoBehaviour
         if (playerComponent.IsBlocking || !playerComponent.CanAttackAfterBlock)
             return;
 
-        if (!Input.GetKeyDown(keyMeleeToCheck))
+        // Determinar si se presionó el botón de ataque según el sistema de input
+        bool attackPressed;
+        if (useNewInputSystem && inputHandler != null)
+        {
+            attackPressed = inputHandler.AttackPressed;
+        }
+        else
+        {
+            attackPressed = Input.GetKeyDown(keyMeleeToCheck);
+        }
+
+        if (!attackPressed)
             return;
 
         // ⬆️ UP ATTACK (priority)
