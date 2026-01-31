@@ -28,14 +28,18 @@ public class Player : MonoBehaviour
     [SerializeField] private float knockbackForce = 8f;
     [SerializeField] private float knockbackUpForce = 3f;
     [SerializeField] private float hitstunDuration = 0.2f;
+    [SerializeField] private float damageFlashDuration = 0.15f;
     private bool isInHitstun = false;
+    private bool isInDamageFlash = false;
 
     [Header("Bloqueo")]
     [SerializeField] private float blockDamageReduction = 0.8f; // Reduce 80% del daño
     [SerializeField] private float blockKnockbackReduction = 0.5f; // Reduce 50% del knockback
     [SerializeField] private float blockStunDuration = 0.15f; // Tiempo sin poder actuar después de bloquear
+    [SerializeField] private float blockToAttackCooldown = 0.25f; // Tiempo sin poder atacar después de bloquear
     private bool isBlocking = false;
     private bool isInBlockStun = false;
+    private bool canAttackAfterBlock = true;
 
     // Eventos para el sistema de combate
     public UnityEvent OnDeath;
@@ -47,6 +51,7 @@ public class Player : MonoBehaviour
     public float MaxHealth => maxHealth;
     public bool IsDead => currentHealth <= 0;
     public bool IsBlocking => isBlocking;
+    public bool CanAttackAfterBlock => canAttackAfterBlock;
 
     [Header("Movimiento")]
     [SerializeField] private float walkSpeed = 5f;
@@ -171,22 +176,10 @@ public class Player : MonoBehaviour
                 horizontalInput = 0f;
         }
 
-        // Agacharse (solo en el suelo) o Fast Fall (en el aire)
+        // Fast Fall (solo en el aire con tecla abajo)
         bool downKey = playerNumber == 1 ? Input.GetKey(KeyCode.S) : Input.GetKey(KeyCode.DownArrow);
         
-        if (isGrounded)
-        {
-            if (downKey)
-            {
-                isCrouching = true;
-                horizontalInput = 0; // No moverse mientras está agachado
-            }
-            else
-            {
-                isCrouching = false;
-            }
-        }
-        else
+        if (!isGrounded)
         {
             // Fast Fall: aplicar fuerza hacia abajo cuando está en el aire
             if (downKey)
@@ -195,12 +188,15 @@ public class Player : MonoBehaviour
             }
         }
 
-        // Salto (solo si está en el suelo y no agachado)
+        // Ya no hay agacharse, se reemplazó por bloqueo
+        isCrouching = false;
+
+        // Salto (solo si está en el suelo y no bloqueando)
         bool jumpKey = playerNumber == 1 
             ? Input.GetKeyDown(KeyCode.W)
             : Input.GetKeyDown(KeyCode.UpArrow);
         
-        if (jumpKey && isGrounded && !isCrouching)
+        if (jumpKey && isGrounded && !isBlocking)
         {
             Jump();
         }
@@ -221,13 +217,33 @@ public class Player : MonoBehaviour
         // Solo puede bloquear en el suelo y si no está en hitstun
         if (!isGrounded || isInHitstun)
         {
+            // Si estaba bloqueando y deja de hacerlo, iniciar cooldown
+            if (isBlocking)
+            {
+                StartCoroutine(BlockToAttackCooldownCoroutine());
+            }
             isBlocking = false;
+            // DEBUG: Restaurar color cuando no bloquea (si no está en flash de daño)
+            if (spriteRenderer != null && !isInDamageFlash) spriteRenderer.color = Color.white;
             return;
         }
 
-        // Tecla de bloqueo: Q (P1) o N (P2)
-        KeyCode blockKey = playerNumber == 1 ? KeyCode.Q : KeyCode.N;
+        // Tecla de bloqueo: S (P1) o DownArrow (P2)
+        KeyCode blockKey = playerNumber == 1 ? KeyCode.S : KeyCode.DownArrow;
+        bool wasBlocking = isBlocking;
         isBlocking = Input.GetKey(blockKey);
+
+        // Si dejó de bloquear, iniciar cooldown para atacar
+        if (wasBlocking && !isBlocking)
+        {
+            StartCoroutine(BlockToAttackCooldownCoroutine());
+        }
+
+        // DEBUG: Cambiar color a azul cuando bloquea (si no está en flash de daño)
+        if (spriteRenderer != null && !isInDamageFlash)
+        {
+            spriteRenderer.color = isBlocking ? Color.yellow : Color.white;
+        }
 
         // No puede moverse mientras bloquea
         if (isBlocking)
@@ -236,9 +252,19 @@ public class Player : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Cooldown después de bloquear antes de poder atacar
+    /// </summary>
+    private System.Collections.IEnumerator BlockToAttackCooldownCoroutine()
+    {
+        canAttackAfterBlock = false;
+        yield return new WaitForSeconds(blockToAttackCooldown);
+        canAttackAfterBlock = true;
+    }
+
     private void HandleDoubleTapDash()
     {
-        if (!isGrounded || isCrouching || !canDash) return;
+        if (!isGrounded || isBlocking || !canDash) return;
 
         // Teclas según jugador
         KeyCode rightKey = playerNumber == 1 ? KeyCode.D : KeyCode.RightArrow;
@@ -289,6 +315,14 @@ public class Player : MonoBehaviour
     {
         // No aplicar movimiento durante hitstun o blockstun (para que funcione el knockback)
         if (isInHitstun || isInBlockStun) return;
+
+        // No moverse mientras ataca
+        PlayerAttack playerAttack = GetComponent<PlayerAttack>();
+        if (playerAttack != null && playerAttack.IsAttacking)
+        {
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            return;
+        }
 
         if (isCrouching)
         {
@@ -482,6 +516,9 @@ public class Player : MonoBehaviour
         OnDamageTaken?.Invoke(finalDamage);
         OnHealthChanged?.Invoke(currentHealth);
 
+        // Efecto visual de daño (sprite rojo)
+        StartCoroutine(DamageFlashCoroutine());
+
         // Aplicar knockback si hay posición del atacante
         if (attackerPosition != Vector2.zero && rb != null)
         {
@@ -542,6 +579,21 @@ public class Player : MonoBehaviour
         isInHitstun = true;
         yield return new WaitForSeconds(hitstunDuration);
         isInHitstun = false;
+    }
+
+    /// <summary>
+    /// Corrutina que hace flash rojo al recibir daño
+    /// </summary>
+    private System.Collections.IEnumerator DamageFlashCoroutine()
+    {
+        if (spriteRenderer != null)
+        {
+            isInDamageFlash = true;
+            spriteRenderer.color = Color.red;
+            yield return new WaitForSeconds(damageFlashDuration);
+            spriteRenderer.color = Color.white;
+            isInDamageFlash = false;
+        }
     }
 
     /// <summary>
