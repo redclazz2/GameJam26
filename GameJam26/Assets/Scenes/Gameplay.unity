@@ -489,6 +489,18 @@ PrefabInstance:
       propertyPath: fastFallForce
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 265142872490906172, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
+      propertyPath: knockbackForce
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 265142872490906172, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
+      propertyPath: hitstunDuration
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 265142872490906172, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
+      propertyPath: knockbackUpForce
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 1423733728754527179, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.402
@@ -545,25 +557,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4344192885927563738, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
+      propertyPath: meleeAttackCooldownDefault
+      value: 0.04
+      objectReference: {fileID: 0}
     - target: {fileID: 5665814711186616940, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
       propertyPath: m_LocalPosition.y
       value: -6.8
       objectReference: {fileID: 0}
     - target: {fileID: 6009415606302305203, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
       propertyPath: m_Size.x
-      value: 4.4492674
+      value: 5.431391
       objectReference: {fileID: 0}
     - target: {fileID: 6009415606302305203, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
       propertyPath: m_Size.y
-      value: 11.672623
+      value: 11.307835
       objectReference: {fileID: 0}
     - target: {fileID: 6009415606302305203, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
       propertyPath: m_Offset.x
-      value: 0.89384234
+      value: 0.40278053
       objectReference: {fileID: 0}
     - target: {fileID: 6009415606302305203, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
       propertyPath: m_Offset.y
-      value: -0.22789001
+      value: -0.88731575
       objectReference: {fileID: 0}
     - target: {fileID: 6009415606302305203, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.x
@@ -973,6 +989,7 @@ GameObject:
   - component: {fileID: 1354111014}
   - component: {fileID: 1354111013}
   - component: {fileID: 1354111015}
+  - component: {fileID: 1354111016}
   m_Layer: 0
   m_Name: MatchManager
   m_TagString: Untagged
@@ -1065,6 +1082,20 @@ MonoBehaviour:
   matchEndPanel: {fileID: 0}
   matchEndText: {fileID: 0}
   countdownText: {fileID: 828383391}
+--- !u!114 &1354111016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354111012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ca425b6eceb24a42a1e181b34270892, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HitStop
+  defaultHitStopDuration: 0.12
+  defaultTimeScale: 0
 --- !u!114 &1422077716 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 265142872490906172, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
@@ -1763,8 +1794,12 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 265142872490906172, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
+      propertyPath: hitstunDuration
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 265142872490906172, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
       propertyPath: knockbackUpForce
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1423733728754527179, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
       propertyPath: m_LocalScale.x
@@ -1822,6 +1857,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4344192885927563738, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
+      propertyPath: meleeAttackCooldownDefault
+      value: 0.04
+      objectReference: {fileID: 0}
     - target: {fileID: 5665814711186616940, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.5
@@ -1836,7 +1875,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6009415606302305203, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
       propertyPath: m_Size.y
-      value: 15.457474
+      value: 13.784036
       objectReference: {fileID: 0}
     - target: {fileID: 6009415606302305203, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
       propertyPath: m_Offset.x
@@ -1844,7 +1883,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6009415606302305203, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
       propertyPath: m_Offset.y
-      value: -1.7645178
+      value: -2.6012368
       objectReference: {fileID: 0}
     - target: {fileID: 6009415606302305203, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x

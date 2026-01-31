@@ -27,6 +27,10 @@ public class Attack : MonoBehaviour
             // Pasar la posición del atacante para el knockback
             Vector2 attackerPosition = owner != null ? owner.transform.position : transform.position;
             player.TakeDamage(damage, attackerPosition);
+            
+            // Activar HitStop para dar impacto al golpe
+            HitStop.Instance?.TriggerHitStop();
+            
             Destroy(gameObject);
         }
     }
