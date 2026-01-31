@@ -72,6 +72,10 @@ public class InputDeviceManager : MonoBehaviour
         if (!eventPtr.IsA<StateEvent>() && !eventPtr.IsA<DeltaStateEvent>())
             return;
 
+        // Ignorar eventos sintéticos o de inicialización
+        if (eventPtr.time <= 0)
+            return;
+
         // Ignorar si el dispositivo ya está asignado
         if (IsDeviceAssigned(device))
             return;
@@ -103,6 +107,10 @@ public class InputDeviceManager : MonoBehaviour
     /// </summary>
     private void HandleKeyboardInput(Keyboard keyboard, int slot)
     {
+        // Verificar que realmente hay una tecla presionada (no solo evento de inicialización)
+        if (!keyboard.anyKey.isPressed)
+            return;
+
         // Determinar qué esquema de teclado se está usando
         bool isWASD = keyboard.wKey.isPressed || keyboard.aKey.isPressed || 
                       keyboard.sKey.isPressed || keyboard.dKey.isPressed ||
