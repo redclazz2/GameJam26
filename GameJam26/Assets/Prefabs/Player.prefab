@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 111497506196606859}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.001, y: -0.604, z: 0}
+  m_LocalPosition: {x: 0.001, y: -0.59, z: 0}
   m_LocalScale: {x: 1, y: 0.153075, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -168,7 +168,7 @@ Transform:
   m_GameObject: {fileID: 1596385596263974393}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.38, y: 1.91, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -268,7 +268,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.03461635, y: -0.032327652}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -278,7 +278,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.0230782, y: 1.0646544}
   m_EdgeRadius: 0
 --- !u!50 &1956376262778539664
 Rigidbody2D:
@@ -321,7 +321,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Movement
   playerNumber: 1
   health: 100
-  damage: 10
+  damage: 12
   maxHealth: 100
   OnDeath:
     m_PersistentCalls:
@@ -332,14 +332,14 @@ MonoBehaviour:
   OnDamageTaken:
     m_PersistentCalls:
       m_Calls: []
-  walkSpeed: 5
+  walkSpeed: 8
   backwardSpeedMultiplier: 0.7
-  jumpForce: 10
-  fallMultiplier: 2.5
+  jumpForce: 22
+  fallMultiplier: 5
   lowJumpMultiplier: 2
   dashSpeed: 15
   dashDuration: 0.2
-  dashCooldown: 0.5
+  dashCooldown: 0.4
   doubleTapTime: 0.25
   groundCheck: {fileID: 5665814711186616940}
   groundCheckRadius: 0.2
@@ -359,8 +359,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaa4b5397673457eebf1bc6a6b419605, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
-  meleeAttackCooldownDefault: 1
+  meleeAttackCooldownDefault: 0.15
   meleeAttack: {fileID: 5896437435647391897, guid: 726bd21db3de058ee97a836e0992cc27, type: 3}
   longAttack: {fileID: 5896437435647391897, guid: f4501bb2f9ace5c2a8b505b4d821deae, type: 3}
   upAttack: {fileID: 5896437435647391897, guid: 9b5f611b7539be1e0b3e1785a0925da2, type: 3}
-  doubleTapAttackTime: 0.25
+  doubleTapAttackTime: 0.2

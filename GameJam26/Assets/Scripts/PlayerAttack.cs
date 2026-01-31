@@ -80,11 +80,11 @@ public class PlayerAttack : MonoBehaviour
 
     private void SpawnMeleeAttack()
     {
-        SpawnAttack(meleeAttack, 3f);
+        SpawnAttack(meleeAttack, 2f);
     }
     private void SpawnLongAttack()
     {
-        SpawnAttack(longAttack, 5f);
+        SpawnAttack(longAttack, 3f);
     }
     private void SpawnUpAttack()
     {
