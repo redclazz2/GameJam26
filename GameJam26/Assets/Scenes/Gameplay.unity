@@ -541,6 +541,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5665814711186616940, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -6.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6009415606302305203, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
+      propertyPath: m_Size.x
+      value: 4.4492674
+      objectReference: {fileID: 0}
+    - target: {fileID: 6009415606302305203, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
+      propertyPath: m_Size.y
+      value: 11.672623
+      objectReference: {fileID: 0}
+    - target: {fileID: 6009415606302305203, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.89384234
+      objectReference: {fileID: 0}
+    - target: {fileID: 6009415606302305203, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.22789001
+      objectReference: {fileID: 0}
+    - target: {fileID: 6009415606302305203, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 10.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 6009415606302305203, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 19.21
+      objectReference: {fileID: 0}
     - target: {fileID: 6009415606302305203, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.x
       value: 10.37
@@ -972,7 +1000,7 @@ MonoBehaviour:
   player2: {fileID: 594846091}
   player1SpawnPoint: {fileID: 278134677}
   player2SpawnPoint: {fileID: 1833828220}
-  roundTime: 10
+  roundTime: 120
   pointsToWin: 3
   countdownSeconds: 3
   player1Points: 0
@@ -1785,6 +1813,30 @@ PrefabInstance:
     - target: {fileID: 1596385596263974393, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5665814711186616940, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5665814711186616940, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -9.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6009415606302305203, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
+      propertyPath: m_Size.x
+      value: 7.2737045
+      objectReference: {fileID: 0}
+    - target: {fileID: 6009415606302305203, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
+      propertyPath: m_Size.y
+      value: 15.457474
+      objectReference: {fileID: 0}
+    - target: {fileID: 6009415606302305203, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
+      propertyPath: m_Offset.x
+      value: -2.3406777
+      objectReference: {fileID: 0}
+    - target: {fileID: 6009415606302305203, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
+      propertyPath: m_Offset.y
+      value: -1.7645178
       objectReference: {fileID: 0}
     - target: {fileID: 6009415606302305203, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
