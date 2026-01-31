@@ -42,8 +42,11 @@ public class Player : MonoBehaviour
     [SerializeField] private float blockKnockbackReduction = 0.5f; // Reduce 50% del knockback
     [SerializeField] private float blockStunDuration = 0.15f; // Tiempo sin poder actuar después de bloquear
     [SerializeField] private float blockToAttackCooldown = 0.25f; // Tiempo sin poder atacar después de bloquear
+    [SerializeField] private float blockPushbackToAttacker = 5f; // Fuerza de empuje al atacante cuando bloqueas
+    [SerializeField] private float pushbackStunDuration = 0.1f; // Duración del stun cuando tu ataque es bloqueado
     private bool isBlocking = false;
     private bool isInBlockStun = false;
+    private bool isInPushbackStun = false; // Cuando tu ataque fue bloqueado
     private bool canAttackAfterBlock = true;
 
     // Eventos para el sistema de combate
@@ -403,8 +406,8 @@ public class Player : MonoBehaviour
 
     private void ApplyMovement()
     {
-        // No aplicar movimiento durante hitstun o blockstun (para que funcione el knockback)
-        if (isInHitstun || isInBlockStun) return;
+        // No aplicar movimiento durante hitstun, blockstun o pushback stun (para que funcione el knockback)
+        if (isInHitstun || isInBlockStun || isInPushbackStun) return;
 
         // No moverse mientras ataca
         PlayerAttack playerAttack = GetComponent<PlayerAttack>();
@@ -584,7 +587,7 @@ public class Player : MonoBehaviour
     /// </summary>
     public void TakeDamage(float damage)
     {
-        TakeDamage(damage, Vector2.zero);
+        TakeDamage(damage, Vector2.zero, out _);
     }
 
     /// <summary>
@@ -592,6 +595,16 @@ public class Player : MonoBehaviour
     /// </summary>
     public void TakeDamage(float damage, Vector2 attackerPosition)
     {
+        TakeDamage(damage, attackerPosition, out _);
+    }
+
+    /// <summary>
+    /// Aplica daño al jugador con knockback desde una dirección.
+    /// Devuelve si el jugador bloqueó el ataque.
+    /// </summary>
+    public void TakeDamage(float damage, Vector2 attackerPosition, out bool wasBlocked)
+    {
+        wasBlocked = false;
         if (IsDead) return;
 
         float finalDamage = damage;
@@ -600,6 +613,7 @@ public class Player : MonoBehaviour
         // Si está bloqueando, reducir daño y knockback
         if (isBlocking)
         {
+            wasBlocked = true;
             finalDamage = damage * (1f - blockDamageReduction);
             finalKnockbackMultiplier = 1f - blockKnockbackReduction;
             
@@ -617,6 +631,15 @@ public class Player : MonoBehaviour
 
         // Efecto visual de daño (sprite rojo)
         StartCoroutine(DamageFlashCoroutine());
+
+        // Vibración del mando al recibir daño
+        if (inputHandler != null)
+        {
+            if (wasBlocked)
+                inputHandler.RumbleOnBlocked();
+            else
+                inputHandler.RumbleOnDamageTaken();
+        }
 
         // Aplicar knockback si hay posición del atacante
         if (attackerPosition != Vector2.zero && rb != null)
@@ -694,6 +717,33 @@ public class Player : MonoBehaviour
             isInDamageFlash = false;
         }
     }
+
+    /// <summary>
+    /// Aplica knockback externo al jugador (usado cuando tu ataque es bloqueado)
+    /// </summary>
+    public void ApplyExternalKnockback(Vector2 direction, float force)
+    {
+        if (rb != null && !IsDead)
+        {
+            rb.linearVelocity = new Vector2(direction.x * force, rb.linearVelocity.y);
+            StartCoroutine(PushbackStunCoroutine());
+        }
+    }
+
+    /// <summary>
+    /// Corrutina de pushback stun (breve pausa cuando tu ataque es bloqueado)
+    /// </summary>
+    private System.Collections.IEnumerator PushbackStunCoroutine()
+    {
+        isInPushbackStun = true;
+        yield return new WaitForSeconds(pushbackStunDuration);
+        isInPushbackStun = false;
+    }
+
+    /// <summary>
+    /// Obtiene la fuerza de pushback que recibe el atacante al ser bloqueado
+    /// </summary>
+    public float GetBlockPushbackForce() => blockPushbackToAttacker;
 
     /// <summary>
     /// Cura al jugador
