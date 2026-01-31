@@ -1,18 +1,30 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+[RequireComponent(typeof(Camera))]
 public class DynamicCameraZoom : MonoBehaviour
 {
     [Header("Targets")]
     public List<Transform> players;
 
+    [Header("Stage")]
+    public float stageBaseY = 0f;   // Altura del piso del escenario
+    public float minCameraY = 2f;   // Nunca más abajo que esto
+
     [Header("Zoom Settings")]
     public float minZoom = 5f;
-    public float maxZoom = 15f;
-    public float zoomLimiter = 10f;
+    public float maxZoom = 9f;
+    public float zoomLimiter = 8f;
 
-    [Header("Smooth Settings")]
-    public float smoothTime = 0.2f;
+    [Header("Vertical Offset (Fighting Game)")]
+    public float maxYOffset = 1.2f;
+    public float closeDeadZone = 2.8f;        // Offset = 0 cuando están cerca
+    public float offsetStartDistance = 3.5f;  // Empieza a subir
+    public float offsetFullDistance = 8f;     // Offset máximo
+    public AnimationCurve offsetCurve;        // Ease-in (MUY importante)
+
+    [Header("Smooth")]
+    public float smoothTime = 0.12f;
 
     private Camera cam;
     private Vector3 velocity;
@@ -31,63 +43,105 @@ public class DynamicCameraZoom : MonoBehaviour
         ZoomCamera();
     }
 
+    // =============================
+    // CAMERA POSITION (X + Y LOCK)
+    // =============================
     void MoveCamera()
     {
-        Vector3 centerPoint = GetCenterPoint();
-        Vector3 newPosition = new Vector3(
-            centerPoint.x,
-            centerPoint.y,
+        float distance = GetHorizontalDistance();
+
+        float yOffset = CalculateYOffset(distance);
+
+        float targetX = GetHorizontalCenterX();
+        float targetY = stageBaseY + yOffset;
+        targetY = Mathf.Max(targetY, minCameraY);
+
+        Vector3 targetPosition = new Vector3(
+            targetX,
+            targetY,
             transform.position.z
         );
 
         transform.position = Vector3.SmoothDamp(
             transform.position,
-            newPosition,
+            targetPosition,
             ref velocity,
             smoothTime
         );
     }
 
+    // =============================
+    // ZOOM (SOLO DISTANCIA X)
+    // =============================
     void ZoomCamera()
     {
-        float greatestDistance = GetGreatestDistance();
-        float targetZoom = Mathf.Lerp(
-            maxZoom,
-            minZoom,
-            greatestDistance / zoomLimiter
-        );
+        float distance = GetHorizontalDistance();
+        float t = Mathf.Clamp01(distance / zoomLimiter);
+
+        float targetZoom = Mathf.Lerp(minZoom, maxZoom, t);
 
         cam.orthographicSize = Mathf.Lerp(
             cam.orthographicSize,
             targetZoom,
-            Time.deltaTime
+            Time.deltaTime * 5f
         );
     }
 
-    float GetGreatestDistance()
+    // =============================
+    // OFFSET LOGIC (PRO)
+    // =============================
+    float CalculateYOffset(float distance)
     {
-        Bounds bounds = new Bounds(players[0].position, Vector3.zero);
+        // Dead zone: NO offset en combate cercano
+        if (distance <= closeDeadZone)
+            return 0f;
 
-        foreach (Transform player in players)
-        {
-            bounds.Encapsulate(player.position);
-        }
+        float t = Mathf.InverseLerp(
+            offsetStartDistance,
+            offsetFullDistance,
+            distance
+        );
 
-        return Mathf.Max(bounds.size.x, bounds.size.y);
+        // Curva para que NO reaccione fuerte al inicio
+        if (offsetCurve != null && offsetCurve.length > 0)
+            t = offsetCurve.Evaluate(t);
+
+        return Mathf.Lerp(0f, maxYOffset, t);
     }
 
-    Vector3 GetCenterPoint()
+    // =============================
+    // HORIZONTAL CALCULATIONS ONLY
+    // =============================
+    float GetHorizontalCenterX()
     {
-        if (players.Count == 1)
-            return players[0].position;
-
-        Bounds bounds = new Bounds(players[0].position, Vector3.zero);
+        float minX = players[0].position.x;
+        float maxX = players[0].position.x;
 
         foreach (Transform player in players)
         {
-            bounds.Encapsulate(player.position);
+            float x = player.position.x;
+            minX = Mathf.Min(minX, x);
+            maxX = Mathf.Max(maxX, x);
         }
 
-        return bounds.center;
+        return (minX + maxX) * 0.5f;
+    }
+
+    float GetHorizontalDistance()
+    {
+        if (players.Count < 2)
+            return 0f;
+
+        float minX = players[0].position.x;
+        float maxX = players[0].position.x;
+
+        foreach (Transform player in players)
+        {
+            float x = player.position.x;
+            minX = Mathf.Min(minX, x);
+            maxX = Mathf.Max(maxX, x);
+        }
+
+        return maxX - minX;
     }
 }
