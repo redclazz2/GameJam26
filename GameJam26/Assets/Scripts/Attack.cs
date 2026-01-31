@@ -24,7 +24,9 @@ public class Attack : MonoBehaviour
         Player player = other.GetComponent<Player>();
         if (player != null)
         {
-            player.TakeDamage(damage);
+            // Pasar la posición del atacante para el knockback
+            Vector2 attackerPosition = owner != null ? owner.transform.position : transform.position;
+            player.TakeDamage(damage, attackerPosition);
             Destroy(gameObject);
         }
     }
