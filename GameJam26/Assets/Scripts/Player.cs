@@ -24,6 +24,12 @@ public class Player : MonoBehaviour
     [SerializeField] private float maxHealth = 100f;
     private float currentHealth;
 
+    [Header("Knockback")]
+    [SerializeField] private float knockbackForce = 8f;
+    [SerializeField] private float knockbackUpForce = 3f;
+    [SerializeField] private float hitstunDuration = 0.2f;
+    private bool isInHitstun = false;
+
     // Eventos para el sistema de combate
     public UnityEvent OnDeath;
     public UnityEvent<float> OnHealthChanged; // Pasa la salud actual
@@ -42,6 +48,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float jumpForce = 12f;
     [SerializeField] private float fallMultiplier = 2.5f;
     [SerializeField] private float lowJumpMultiplier = 2f;
+    [SerializeField] private float fastFallForce = 15f;
 
     [Header("Dash")]
     [SerializeField] private float dashSpeed = 15f;
@@ -155,11 +162,12 @@ public class Player : MonoBehaviour
                 horizontalInput = 0f;
         }
 
-        // Agacharse (solo en el suelo)
+        // Agacharse (solo en el suelo) o Fast Fall (en el aire)
+        bool downKey = playerNumber == 1 ? Input.GetKey(KeyCode.S) : Input.GetKey(KeyCode.DownArrow);
+        
         if (isGrounded)
         {
-            bool crouchKey = playerNumber == 1 ? Input.GetKey(KeyCode.S) : Input.GetKey(KeyCode.DownArrow);
-            if (crouchKey)
+            if (downKey)
             {
                 isCrouching = true;
                 horizontalInput = 0; // No moverse mientras está agachado
@@ -169,10 +177,18 @@ public class Player : MonoBehaviour
                 isCrouching = false;
             }
         }
+        else
+        {
+            // Fast Fall: aplicar fuerza hacia abajo cuando está en el aire
+            if (downKey)
+            {
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, -fastFallForce);
+            }
+        }
 
         // Salto (solo si está en el suelo y no agachado)
         bool jumpKey = playerNumber == 1 
-            ? (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space))
+            ? Input.GetKeyDown(KeyCode.W)
             : Input.GetKeyDown(KeyCode.UpArrow);
         
         if (jumpKey && isGrounded && !isCrouching)
@@ -242,6 +258,9 @@ public class Player : MonoBehaviour
 
     private void ApplyMovement()
     {
+        // No aplicar movimiento durante hitstun (para que funcione el knockback)
+        if (isInHitstun) return;
+
         if (isCrouching)
         {
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
@@ -275,7 +294,7 @@ public class Player : MonoBehaviour
         else if (rb.linearVelocity.y > 0)
         {
             bool holdingJump = playerNumber == 1 
-                ? (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Space))
+                ? Input.GetKey(KeyCode.W)
                 : Input.GetKey(KeyCode.UpArrow);
             
             if (!holdingJump)
@@ -398,6 +417,14 @@ public class Player : MonoBehaviour
     /// </summary>
     public void TakeDamage(float damage)
     {
+        TakeDamage(damage, Vector2.zero);
+    }
+
+    /// <summary>
+    /// Aplica daño al jugador con knockback desde una dirección
+    /// </summary>
+    public void TakeDamage(float damage, Vector2 attackerPosition)
+    {
         if (IsDead) return;
 
         currentHealth -= damage;
@@ -406,12 +433,44 @@ public class Player : MonoBehaviour
         OnDamageTaken?.Invoke(damage);
         OnHealthChanged?.Invoke(currentHealth);
 
+        // Aplicar knockback si hay posición del atacante
+        if (attackerPosition != Vector2.zero && rb != null)
+        {
+            ApplyKnockback(attackerPosition);
+        }
+
         Debug.Log($"{gameObject.name} recibió {damage} de daño. Salud: {currentHealth}/{maxHealth}");
 
         if (currentHealth <= 0)
         {
             Die();
         }
+    }
+
+    /// <summary>
+    /// Aplica fuerza de retroceso al jugador
+    /// </summary>
+    private void ApplyKnockback(Vector2 attackerPosition)
+    {
+        // Calcular dirección del knockback (alejándose del atacante)
+        float knockbackDirection = transform.position.x > attackerPosition.x ? 1f : -1f;
+        
+        // Aplicar fuerza
+        Vector2 knockback = new Vector2(knockbackDirection * knockbackForce, knockbackUpForce);
+        rb.linearVelocity = knockback;
+
+        // Iniciar hitstun para que el movimiento no cancele el knockback
+        StartCoroutine(HitstunCoroutine());
+    }
+
+    /// <summary>
+    /// Corrutina que bloquea el movimiento brevemente después de recibir daño
+    /// </summary>
+    private System.Collections.IEnumerator HitstunCoroutine()
+    {
+        isInHitstun = true;
+        yield return new WaitForSeconds(hitstunDuration);
+        isInHitstun = false;
     }
 
     /// <summary>
