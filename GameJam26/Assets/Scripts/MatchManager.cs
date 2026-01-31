@@ -17,6 +17,7 @@ public class MatchManager : MonoBehaviour
     [Header("Configuración de Partida")]
     [SerializeField] private float roundTime = 100f; // 2 minutos
     [SerializeField] private int pointsToWin = 3;
+    [SerializeField] private int countdownSeconds = 3; // Cuenta regresiva antes de iniciar
 
     [Header("Estado Actual")]
     [SerializeField] private int player1Points = 0;
@@ -31,6 +32,7 @@ public class MatchManager : MonoBehaviour
     public UnityEvent<int> OnRoundEnd; // ganador de la ronda (1 o 2, 0 = empate)
     public UnityEvent<int> OnMatchEnd; // ganador del match (1 o 2)
     public UnityEvent OnRoundStart;
+    public UnityEvent<string> OnCountdownChanged; // "3", "2", "1", "GO!", "" (vacío para ocultar)
 
     // Propiedades públicas
     public float CurrentTime => currentTime;
@@ -59,6 +61,7 @@ public class MatchManager : MonoBehaviour
         OnRoundEnd ??= new UnityEvent<int>();
         OnMatchEnd ??= new UnityEvent<int>();
         OnRoundStart ??= new UnityEvent();
+        OnCountdownChanged ??= new UnityEvent<string>();
 
         // Suscribirse a los eventos de muerte de los jugadores
         if (player1 != null)
@@ -97,9 +100,6 @@ public class MatchManager : MonoBehaviour
     {
         if (isMatchOver) return;
 
-        currentTime = roundTime;
-        isRoundActive = true;
-
         // Teletransportar jugadores a sus spawn points
         if (player1 != null && player1SpawnPoint != null)
         {
@@ -114,14 +114,46 @@ public class MatchManager : MonoBehaviour
         player1?.ResetHealth();
         player2?.ResetHealth();
 
+        // Deshabilitar movimiento durante el countdown
+        player1?.SetMovementEnabled(false);
+        player2?.SetMovementEnabled(false);
+
+        OnRoundStart?.Invoke();
+
+        // Iniciar cuenta regresiva
+        StartCoroutine(CountdownCoroutine());
+    }
+
+    /// <summary>
+    /// Corrutina para la cuenta regresiva antes de iniciar la ronda
+    /// </summary>
+    private System.Collections.IEnumerator CountdownCoroutine()
+    {
+        // Mostrar números de cuenta regresiva
+        for (int i = countdownSeconds; i > 0; i--)
+        {
+            OnCountdownChanged?.Invoke(i.ToString());
+            yield return new WaitForSeconds(1f);
+        }
+
+        // Mostrar "GO!"
+        OnCountdownChanged?.Invoke("GO!");
+        
+        // Activar la ronda
+        currentTime = roundTime;
+        isRoundActive = true;
+
         // Habilitar el movimiento de los jugadores
         player1?.SetMovementEnabled(true);
         player2?.SetMovementEnabled(true);
 
-        OnRoundStart?.Invoke();
         OnTimeChanged?.Invoke(currentTime);
 
         Debug.Log("¡Ronda iniciada!");
+
+        // Ocultar el countdown después de un momento
+        yield return new WaitForSeconds(0.5f);
+        OnCountdownChanged?.Invoke("");
     }
 
     /// <summary>
