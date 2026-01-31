@@ -361,3 +361,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
   meleeAttackCooldownDefault: 1
   meleeAttack: {fileID: 5896437435647391897, guid: 726bd21db3de058ee97a836e0992cc27, type: 3}
+  longAttack: {fileID: 5896437435647391897, guid: f4501bb2f9ace5c2a8b505b4d821deae, type: 3}
+  upAttack: {fileID: 5896437435647391897, guid: 9b5f611b7539be1e0b3e1785a0925da2, type: 3}
+  doubleTapAttackTime: 0.25

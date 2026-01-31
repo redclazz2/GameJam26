@@ -5,6 +5,15 @@ public class PlayerAttack : MonoBehaviour
     [Header("Attack Settings")]
     [SerializeField] private float meleeAttackCooldownDefault = 0.05f;
     [SerializeField] private GameObject meleeAttack;
+    [SerializeField] private GameObject longAttack;
+    [SerializeField] private GameObject upAttack;
+
+    [Header("Advanced Attack Settings")]
+    [SerializeField] private float doubleTapAttackTime = 0.25f;
+
+    private float lastAttackTapTime;
+    private bool waitingForSecondTap;
+
 
     private float meleeAttackCooldown;
     private Transform playerTransform;
@@ -31,24 +40,85 @@ public class PlayerAttack : MonoBehaviour
         if (meleeAttackCooldown > 0f)
             meleeAttackCooldown -= Time.deltaTime;
 
-        if (meleeAttackCooldown <= 0f && Input.GetKeyDown(keyMeleeToCheck))
+        if (meleeAttackCooldown > 0f)
+            return;
+
+        if (!Input.GetKeyDown(keyMeleeToCheck))
+            return;
+
+        // ⬆️ UP ATTACK (highest priority!)
+        if (!playerComponent.IsGrounded())
         {
-            float offset = playerComponent.FacingDirection == 1 ? 3f : -3f;
-
-            Vector3 spawnPosition = new Vector3(
-                playerTransform.position.x + offset,
-                playerTransform.position.y,
-                playerTransform.position.z
-            );
-
-            GameObject attackGO = Instantiate(meleeAttack, spawnPosition, Quaternion.identity);
-
-            Attack attack = attackGO.GetComponent<Attack>();
-            attack.damage = playerComponent.GetDamage();
-            attack.owner = gameObject;
-
-            meleeAttackCooldown = meleeAttackCooldownDefault;
+            SpawnUpAttack();
+            return;
         }
+
+        // 💥💥 DOUBLE TAP = LONG ATTACK
+        if (waitingForSecondTap && Time.time - lastAttackTapTime <= doubleTapAttackTime)
+        {
+            SpawnLongAttack();
+            waitingForSecondTap = false;
+            return;
+        }
+
+        // 💥 FIRST TAP
+        lastAttackTapTime = Time.time;
+        waitingForSecondTap = true;
+
+        Invoke(nameof(ResolveSingleTap), doubleTapAttackTime);
+    }
+
+
+    private void ResolveSingleTap()
+    {
+        if (!waitingForSecondTap)
+            return;
+
+        SpawnMeleeAttack();
+        waitingForSecondTap = false;
+    }
+
+    private void SpawnMeleeAttack()
+    {
+        SpawnAttack(meleeAttack, 3f);
+    }
+    private void SpawnLongAttack()
+    {
+        SpawnAttack(longAttack, 5f);
+    }
+    private void SpawnUpAttack()
+    {
+        Vector3 spawnPosition = new Vector3(
+            playerTransform.position.x,
+            playerTransform.position.y + 2f,
+            playerTransform.position.z
+        );
+
+        GameObject attackGO = Instantiate(upAttack, spawnPosition, Quaternion.identity);
+        SetupAttack(attackGO);
+
+        meleeAttackCooldown = meleeAttackCooldownDefault;
+    }
+    private void SpawnAttack(GameObject attackPrefab, float horizontalOffset)
+    {
+        float direction = playerComponent.FacingDirection;
+
+        Vector3 spawnPosition = new Vector3(
+            playerTransform.position.x + horizontalOffset * direction,
+            playerTransform.position.y,
+            playerTransform.position.z
+        );
+
+        GameObject attackGO = Instantiate(attackPrefab, spawnPosition, Quaternion.identity);
+        SetupAttack(attackGO);
+
+        meleeAttackCooldown = meleeAttackCooldownDefault;
+    }
+    private void SetupAttack(GameObject attackGO)
+    {
+        Attack attack = attackGO.GetComponent<Attack>();
+        attack.damage = playerComponent.GetDamage();
+        attack.owner = gameObject;
     }
 
 }

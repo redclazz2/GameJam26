@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6419361547960696526}
   - component: {fileID: 2565387730235440393}
   m_Layer: 0
-  m_Name: Attack
+  m_Name: UpAttack
   m_TagString: Attack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,13 +27,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5896437435647391897}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.94, y: 1.03, z: 0}
-  m_LocalScale: {x: 1, y: 2.42, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.91844636, w: 0.39554563}
+  m_LocalPosition: {x: -5.94, y: 4.16, z: 0}
+  m_LocalScale: {x: 1.99, y: 2.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -133.4}
 --- !u!212 &8208152110199066447
 SpriteRenderer:
   serializedVersion: 2
