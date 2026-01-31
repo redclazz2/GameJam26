@@ -1799,11 +1799,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 265142872490906172, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
       propertyPath: knockbackUpForce
-<<<<<<< HEAD
-      value: 8
-=======
       value: 7
->>>>>>> 5c1f925be12637771b080862e5da10bb1a5756f8
       objectReference: {fileID: 0}
     - target: {fileID: 1423733728754527179, guid: 130b376596ecb5b4ab5aeae5c50fc9d9, type: 3}
       propertyPath: m_LocalScale.x
