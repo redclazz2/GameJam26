@@ -1,19 +1,14 @@
-using System;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    private Transform playerTransform;
-    private Player playerComponent;
-
     [Header("Attack Settings")]
-    [SerializeField] private float meleeAttackCooldownDefault = 1f;
+    [SerializeField] private float meleeAttackCooldownDefault = 0.2f;
     [SerializeField] private GameObject meleeAttack;
 
-    [Header("State")]
-    [SerializeField] private FacingDirection facingDirection = FacingDirection.Right;
     private float meleeAttackCooldown;
-
+    private Transform playerTransform;
+    private Player playerComponent;
     void Start()
     {
         if (meleeAttack == null)
@@ -31,28 +26,27 @@ public class PlayerAttack : MonoBehaviour
 
     void Update()
     {
-        // cooldown ticks every frame
         if (meleeAttackCooldown > 0f)
-        {
             meleeAttackCooldown -= Time.deltaTime;
-        }
 
-        // attack only on key press
         if (meleeAttackCooldown <= 0f && Input.GetKeyDown(KeyCode.X))
         {
-
-
             float offset = playerComponent.FacingDirection == 1 ? 1f : -1f;
-                        Debug.Log(playerComponent.FacingDirection);
+
             Vector3 spawnPosition = new Vector3(
                 playerTransform.position.x + offset,
                 playerTransform.position.y,
                 playerTransform.position.z
             );
 
-            Instantiate(meleeAttack, spawnPosition, Quaternion.identity);
+            GameObject attackGO = Instantiate(meleeAttack, spawnPosition, Quaternion.identity);
+
+            Attack attack = attackGO.GetComponent<Attack>();
+            attack.damage = playerComponent.GetDamage();
+            attack.owner = gameObject;
 
             meleeAttackCooldown = meleeAttackCooldownDefault;
         }
     }
+
 }

@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
 
     [Header("Stats")]
     [SerializeField] private float health = 100f;
+    [SerializeField] private float damage = 10f;
 
     [Header("Movimiento")]
     [SerializeField] private float walkSpeed = 5f;
@@ -319,5 +320,15 @@ public class Player : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
         }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+    }
+
+    public float GetDamage()
+    {
+        return damage;
     }
 }

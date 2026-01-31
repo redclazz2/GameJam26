@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
+    public GameObject owner;
+    public float damage;
+
     void Start()
     {
         Destroy(gameObject, 0.2f);
@@ -9,6 +12,20 @@ public class Attack : MonoBehaviour
 
     void OnDestroy()
     {
-       
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        // Don't hit the owner
+        if (other.gameObject == owner)
+            return;
+
+        Player player = other.GetComponent<Player>();
+        if (player != null)
+        {
+            player.TakeDamage(damage);
+            Destroy(gameObject);
+        }
     }
 }
