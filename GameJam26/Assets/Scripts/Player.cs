@@ -30,6 +30,13 @@ public class Player : MonoBehaviour
     [SerializeField] private float hitstunDuration = 0.2f;
     private bool isInHitstun = false;
 
+    [Header("Bloqueo")]
+    [SerializeField] private float blockDamageReduction = 0.8f; // Reduce 80% del daño
+    [SerializeField] private float blockKnockbackReduction = 0.5f; // Reduce 50% del knockback
+    [SerializeField] private float blockStunDuration = 0.15f; // Tiempo sin poder actuar después de bloquear
+    private bool isBlocking = false;
+    private bool isInBlockStun = false;
+
     // Eventos para el sistema de combate
     public UnityEvent OnDeath;
     public UnityEvent<float> OnHealthChanged; // Pasa la salud actual
@@ -39,6 +46,7 @@ public class Player : MonoBehaviour
     public float CurrentHealth => currentHealth;
     public float MaxHealth => maxHealth;
     public bool IsDead => currentHealth <= 0;
+    public bool IsBlocking => isBlocking;
 
     [Header("Movimiento")]
     [SerializeField] private float walkSpeed = 5f;
@@ -62,7 +70,7 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
 
     // Estados del personaje
-    public enum PlayerState { Idle, Walking, Jumping, Crouching, Dashing }
+    public enum PlayerState { Idle, Walking, Jumping, Crouching, Dashing, Blocking }
     public PlayerState currentState = PlayerState.Idle;
 
     // Variables internas
@@ -115,11 +123,12 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        // No procesar input durante dash
-        if (isDashing) return;
+        // No procesar input durante dash o blockstun
+        if (isDashing || isInBlockStun) return;
 
         CheckGrounded();
         HandleInput();
+        HandleBlockInput();
         HandleDoubleTapDash();
         UpdateState();
         UpdateAnimations();
@@ -207,6 +216,26 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void HandleBlockInput()
+    {
+        // Solo puede bloquear en el suelo y si no está en hitstun
+        if (!isGrounded || isInHitstun)
+        {
+            isBlocking = false;
+            return;
+        }
+
+        // Tecla de bloqueo: Q (P1) o N (P2)
+        KeyCode blockKey = playerNumber == 1 ? KeyCode.Q : KeyCode.N;
+        isBlocking = Input.GetKey(blockKey);
+
+        // No puede moverse mientras bloquea
+        if (isBlocking)
+        {
+            horizontalInput = 0;
+        }
+    }
+
     private void HandleDoubleTapDash()
     {
         if (!isGrounded || isCrouching || !canDash) return;
@@ -258,8 +287,8 @@ public class Player : MonoBehaviour
 
     private void ApplyMovement()
     {
-        // No aplicar movimiento durante hitstun (para que funcione el knockback)
-        if (isInHitstun) return;
+        // No aplicar movimiento durante hitstun o blockstun (para que funcione el knockback)
+        if (isInHitstun || isInBlockStun) return;
 
         if (isCrouching)
         {
@@ -344,6 +373,10 @@ public class Player : MonoBehaviour
         {
             currentState = PlayerState.Dashing;
         }
+        else if (isBlocking)
+        {
+            currentState = PlayerState.Blocking;
+        }
         else if (!isGrounded)
         {
             currentState = PlayerState.Jumping;
@@ -370,6 +403,7 @@ public class Player : MonoBehaviour
         animator.SetBool("IsGrounded", isGrounded);
         animator.SetBool("IsCrouching", isCrouching);
         animator.SetBool("IsDashing", isDashing);
+        animator.SetBool("IsBlocking", isBlocking);
         animator.SetFloat("Speed", Mathf.Abs(horizontalInput));
         animator.SetFloat("VerticalVelocity", rb.linearVelocity.y);
     }
@@ -427,19 +461,37 @@ public class Player : MonoBehaviour
     {
         if (IsDead) return;
 
-        currentHealth -= damage;
+        float finalDamage = damage;
+        float finalKnockbackMultiplier = 1f;
+
+        // Si está bloqueando, reducir daño y knockback
+        if (isBlocking)
+        {
+            finalDamage = damage * (1f - blockDamageReduction);
+            finalKnockbackMultiplier = 1f - blockKnockbackReduction;
+            
+            // Iniciar block stun
+            StartCoroutine(BlockStunCoroutine());
+            
+            Debug.Log($"{gameObject.name} bloqueó! Daño reducido: {damage} -> {finalDamage}");
+        }
+
+        currentHealth -= finalDamage;
         currentHealth = Mathf.Max(0, currentHealth);
         
-        OnDamageTaken?.Invoke(damage);
+        OnDamageTaken?.Invoke(finalDamage);
         OnHealthChanged?.Invoke(currentHealth);
 
         // Aplicar knockback si hay posición del atacante
         if (attackerPosition != Vector2.zero && rb != null)
         {
-            ApplyKnockback(attackerPosition);
+            ApplyKnockback(attackerPosition, finalKnockbackMultiplier);
         }
 
-        Debug.Log($"{gameObject.name} recibió {damage} de daño. Salud: {currentHealth}/{maxHealth}");
+        if (!isBlocking)
+        {
+            Debug.Log($"{gameObject.name} recibió {finalDamage} de daño. Salud: {currentHealth}/{maxHealth}");
+        }
 
         if (currentHealth <= 0)
         {
@@ -450,17 +502,36 @@ public class Player : MonoBehaviour
     /// <summary>
     /// Aplica fuerza de retroceso al jugador
     /// </summary>
-    private void ApplyKnockback(Vector2 attackerPosition)
+    private void ApplyKnockback(Vector2 attackerPosition, float multiplier = 1f)
     {
         // Calcular dirección del knockback (alejándose del atacante)
         float knockbackDirection = transform.position.x > attackerPosition.x ? 1f : -1f;
         
-        // Aplicar fuerza
-        Vector2 knockback = new Vector2(knockbackDirection * knockbackForce, knockbackUpForce);
+        // Si está bloqueando, solo knockback horizontal (sin vertical)
+        float verticalKnockback = isBlocking ? 0f : knockbackUpForce * multiplier;
+        
+        // Aplicar fuerza con multiplicador
+        Vector2 knockback = new Vector2(
+            knockbackDirection * knockbackForce * multiplier, 
+            verticalKnockback
+        );
         rb.linearVelocity = knockback;
 
-        // Iniciar hitstun para que el movimiento no cancele el knockback
-        StartCoroutine(HitstunCoroutine());
+        // Iniciar hitstun solo si no está bloqueando
+        if (!isBlocking)
+        {
+            StartCoroutine(HitstunCoroutine());
+        }
+    }
+
+    /// <summary>
+    /// Corrutina de block stun (no puede actuar brevemente después de bloquear)
+    /// </summary>
+    private System.Collections.IEnumerator BlockStunCoroutine()
+    {
+        isInBlockStun = true;
+        yield return new WaitForSeconds(blockStunDuration);
+        isInBlockStun = false;
     }
 
     /// <summary>
