@@ -10,6 +10,10 @@ public class MatchManager : MonoBehaviour
     [SerializeField] private Player player1;
     [SerializeField] private Player player2;
 
+    [Header("Spawn Points")]
+    [SerializeField] private Transform player1SpawnPoint;
+    [SerializeField] private Transform player2SpawnPoint;
+
     [Header("Configuración de Partida")]
     [SerializeField] private float roundTime = 100f; // 2 minutos
     [SerializeField] private int pointsToWin = 3;
@@ -95,6 +99,16 @@ public class MatchManager : MonoBehaviour
 
         currentTime = roundTime;
         isRoundActive = true;
+
+        // Teletransportar jugadores a sus spawn points
+        if (player1 != null && player1SpawnPoint != null)
+        {
+            player1.transform.position = player1SpawnPoint.position;
+        }
+        if (player2 != null && player2SpawnPoint != null)
+        {
+            player2.transform.position = player2SpawnPoint.position;
+        }
 
         // Resetear la salud de ambos jugadores
         player1?.ResetHealth();

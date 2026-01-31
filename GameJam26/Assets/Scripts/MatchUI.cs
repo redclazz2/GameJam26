@@ -136,6 +136,12 @@ public class MatchUI : MonoBehaviour
 
     private void ShowRoundEnd(int winner)
     {
+        // Ocultar el timer al finalizar la ronda
+        if (timerText != null)
+        {
+            timerText.gameObject.SetActive(false);
+        }
+
         if (roundEndPanel != null)
         {
             roundEndPanel.SetActive(true);
@@ -156,6 +162,12 @@ public class MatchUI : MonoBehaviour
 
     private void ShowMatchEnd(int winner)
     {
+        // Ocultar el timer al finalizar el match
+        if (timerText != null)
+        {
+            timerText.gameObject.SetActive(false);
+        }
+
         if (matchEndPanel != null)
         {
             matchEndPanel.SetActive(true);
@@ -178,9 +190,10 @@ public class MatchUI : MonoBehaviour
             matchEndPanel.SetActive(false);
         }
 
-        // Resetear color del timer
+        // Mostrar y resetear color del timer
         if (timerText != null)
         {
+            timerText.gameObject.SetActive(true);
             timerText.color = Color.white;
         }
     }
