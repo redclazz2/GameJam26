@@ -17,20 +17,19 @@ public class Attack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Don't hit the owner
         if (other.gameObject == owner)
             return;
 
         Player player = other.GetComponent<Player>();
         if (player != null)
         {
-            // Pasar la posición del atacante para el knockback
             Vector2 attackerPosition = owner != null ? owner.transform.position : transform.position;
             player.TakeDamage(damage, attackerPosition);
-            
-            // Activar HitStop para dar impacto al golpe
+
             HitStop.Instance?.TriggerHitStop();
-            
+
+            ScreenShakeManager.Instance?.TriggerShake();
+
             Destroy(gameObject);
         }
     }

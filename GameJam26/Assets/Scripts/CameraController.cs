@@ -56,19 +56,28 @@ public class DynamicCameraZoom : MonoBehaviour
         float targetY = stageBaseY + yOffset;
         targetY = Mathf.Max(targetY, minCameraY);
 
+        // 👉 ESTA LÍNEA FALTABA
         Vector3 targetPosition = new Vector3(
             targetX,
             targetY,
             transform.position.z
         );
 
-        transform.position = Vector3.SmoothDamp(
-            transform.position,
-            targetPosition,
-            ref velocity,
-            smoothTime
-        );
+Vector3 smoothPosition = Vector3.SmoothDamp(
+    transform.position,
+    targetPosition,
+    ref velocity,
+    smoothTime
+);
+
+Vector3 shakeOffset = ScreenShakeManager.Instance != null
+    ? ScreenShakeManager.Instance.GetShakeOffset()
+    : Vector3.zero;
+
+transform.position = smoothPosition + shakeOffset;
+
     }
+
 
     // =============================
     // ZOOM (SOLO DISTANCIA X)
