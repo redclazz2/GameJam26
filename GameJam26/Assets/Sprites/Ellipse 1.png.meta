@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7c409f5f48cfe957393ce31c1ec616d3
+guid: bf1ab7f071bbe23439c3b4eead4e48b0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1881370240527541639
-    second: TOMBO_0
+      213: -4646876343654227710
+    second: Ellipse 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,40 +96,27 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TOMBO_0
+      name: Ellipse 1_0
       rect:
         serializedVersion: 2
-        x: 87
-        y: 266
-        width: 810
-        height: 1527
+        x: 0
+        y: 0
+        width: 500
+        height: 500
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 785a2ad0448fb1a10800000000000000
-      internalID: 1881370240527541639
+      spriteID: 201e25de59af28fb0800000000000000
+      internalID: -4646876343654227710
       vertices: []
       indices: 
       edges: []
@@ -139,7 +126,7 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -148,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      TOMBO_0: 1881370240527541639
+      Ellipse 1_0: -4646876343654227710
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

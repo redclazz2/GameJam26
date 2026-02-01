@@ -29,6 +29,16 @@ public class Player : MonoBehaviour
     [SerializeField] private float maxHealth = 100f;
     private float currentHealth;
 
+    [Header("Stamina")]
+    [SerializeField] private float maxStamina = 100f;
+    [SerializeField] private float staminaRegenRate = 15f; // Stamina por segundo
+    [SerializeField] private float staminaRegenDelay = 0.5f; // Delay antes de empezar a regenerar
+    [SerializeField] private float attackStaminaCost = 20f; // Costo de atacar
+    [SerializeField] private float blockStaminaCost = 15f; // Costo de bloquear un golpe
+    [SerializeField] private float blockingStaminaDrainRate = 8f; // Stamina drenada por segundo mientras bloquea
+    private float currentStamina;
+    private float staminaRegenTimer;
+
     [Header("Knockback")]
     [SerializeField] private float knockbackForce = 8f;
     [SerializeField] private float knockbackUpForce = 3f;
@@ -53,6 +63,7 @@ public class Player : MonoBehaviour
     public UnityEvent OnDeath;
     public UnityEvent<float> OnHealthChanged; // Pasa la salud actual
     public UnityEvent<float> OnDamageTaken; // Pasa el daño recibido
+    public UnityEvent<float> OnStaminaChanged; // Pasa la stamina actual
 
     // Propiedades públicas para el sistema de salud
     public float CurrentHealth => currentHealth;
@@ -61,18 +72,25 @@ public class Player : MonoBehaviour
     public bool IsBlocking => isBlocking;
     public bool CanAttackAfterBlock => canAttackAfterBlock;
 
+    // Propiedades públicas para stamina
+    public float CurrentStamina => currentStamina;
+    public float MaxStamina => maxStamina;
+    public float AttackStaminaCost => attackStaminaCost;
+    public bool HasEnoughStamina(float cost) => currentStamina >= cost;
+
     [Header("Movimiento")]
     [SerializeField] private float walkSpeed = 5f;
     [SerializeField] private float backwardSpeedMultiplier = 0.7f;
 
     [Header("Salto")]
-    [SerializeField] private float jumpForce = 12f;
+    [SerializeField] private float jumpForce = 18f;
     [SerializeField] private float fallMultiplier = 2.5f;
     [SerializeField] private float lowJumpMultiplier = 2f;
     [SerializeField] private float fastFallForce = 15f;
 
     [Header("Dash")]
     [SerializeField] private float dashSpeed = 15f;
+    [SerializeField] private float airDashSpeed = 22f; // Dash aéreo más fuerte
     [SerializeField] private float dashDuration = 0.2f;
     [SerializeField] private float dashCooldown = 0.5f;
     [SerializeField] private float doubleTapTime = 0.25f;
@@ -120,9 +138,11 @@ public class Player : MonoBehaviour
         OnDeath ??= new UnityEvent();
         OnHealthChanged ??= new UnityEvent<float>();
         OnDamageTaken ??= new UnityEvent<float>();
+        OnStaminaChanged ??= new UnityEvent<float>();
 
-        // Inicializar salud
+        // Inicializar salud y stamina
         currentHealth = maxHealth;
+        currentStamina = maxStamina;
 
         // Configurar Rigidbody2D
         if (rb != null)
@@ -142,6 +162,7 @@ public class Player : MonoBehaviour
         HandleDoubleTapDash();
         UpdateState();
         UpdateAnimations();
+        RegenerateStamina();
     }
 
     void FixedUpdate()
@@ -267,8 +288,8 @@ public class Player : MonoBehaviour
 
     private void HandleBlockInput()
     {
-        // Solo puede bloquear en el suelo y si no está en hitstun
-        if (!isGrounded || isInHitstun)
+        // No puede bloquear si está en hitstun
+        if (isInHitstun)
         {
             // Si estaba bloqueando y deja de hacerlo, iniciar cooldown
             if (isBlocking)
@@ -301,16 +322,19 @@ public class Player : MonoBehaviour
             StartCoroutine(BlockToAttackCooldownCoroutine());
         }
 
-        // DEBUG: Cambiar color a azul cuando bloquea (si no está en flash de daño)
+        // DEBUG: Cambiar color a amarillo cuando bloquea (si no está en flash de daño)
         if (spriteRenderer != null && !isInDamageFlash)
         {
             spriteRenderer.color = isBlocking ? Color.yellow : Color.white;
         }
 
-        // No puede moverse mientras bloquea
+        // No puede moverse horizontalmente mientras bloquea (pero puede caer normalmente)
         if (isBlocking)
         {
             horizontalInput = 0;
+            
+            // Drenar stamina mientras bloquea
+            DrainStaminaWhileBlocking();
         }
     }
 
@@ -322,6 +346,20 @@ public class Player : MonoBehaviour
         canAttackAfterBlock = false;
         yield return new WaitForSeconds(blockToAttackCooldown);
         canAttackAfterBlock = true;
+    }
+
+    /// <summary>
+    /// Drena stamina gradualmente mientras el jugador está bloqueando
+    /// </summary>
+    private void DrainStaminaWhileBlocking()
+    {
+        if (currentStamina > 0)
+        {
+            currentStamina -= blockingStaminaDrainRate * Time.deltaTime;
+            currentStamina = Mathf.Max(0, currentStamina);
+            staminaRegenTimer = staminaRegenDelay; // Resetear el delay de regeneración
+            OnStaminaChanged?.Invoke(currentStamina);
+        }
     }
 
     private void HandleDoubleTapDash()
@@ -463,6 +501,9 @@ public class Player : MonoBehaviour
         canDash = false;
         currentState = PlayerState.Dashing;
         
+        // Determinar velocidad de dash (más fuerte en el aire)
+        float currentDashSpeed = isGrounded ? dashSpeed : airDashSpeed;
+        
         // Marcar que usó el air dash si está en el aire
         if (!isGrounded)
         {
@@ -471,7 +512,7 @@ public class Player : MonoBehaviour
 
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0;
-        rb.linearVelocity = new Vector2(direction * dashSpeed, 0);
+        rb.linearVelocity = new Vector2(direction * currentDashSpeed, 0);
 
         yield return new WaitForSeconds(dashDuration);
 
@@ -601,6 +642,9 @@ public class Player : MonoBehaviour
             finalDamage = damage * (1f - blockDamageReduction);
             finalKnockbackMultiplier = 1f - blockKnockbackReduction;
             
+            // Gastar stamina al bloquear
+            UseStamina(blockStaminaCost);
+            
             // Iniciar block stun
             StartCoroutine(BlockStunCoroutine());
             
@@ -613,8 +657,8 @@ public class Player : MonoBehaviour
         OnDamageTaken?.Invoke(finalDamage);
         OnHealthChanged?.Invoke(currentHealth);
 
-        // Efecto visual de daño (sprite rojo)
-        StartCoroutine(DamageFlashCoroutine());
+        // Efecto visual de daño (naranja si bloqueó, rojo si no)
+        StartCoroutine(DamageFlashCoroutine(wasBlocked));
 
         // Vibración del mando al recibir daño
         if (inputHandler != null)
@@ -688,14 +732,15 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
-    /// Corrutina que hace flash rojo al recibir daño
+    /// Corrutina que hace flash al recibir daño (naranja si bloqueó, rojo si no)
     /// </summary>
-    private System.Collections.IEnumerator DamageFlashCoroutine()
+    private System.Collections.IEnumerator DamageFlashCoroutine(bool wasBlocked = false)
     {
         if (spriteRenderer != null)
         {
             isInDamageFlash = true;
-            spriteRenderer.color = Color.red;
+            // Naranja si bloqueó, rojo si recibió daño completo
+            spriteRenderer.color = wasBlocked ? new Color(1f, 0.5f, 0f) : Color.red;
             yield return new WaitForSeconds(damageFlashDuration);
             spriteRenderer.color = Color.white;
             isInDamageFlash = false;
@@ -730,6 +775,45 @@ public class Player : MonoBehaviour
     public float GetBlockPushbackForce() => blockPushbackToAttacker;
 
     /// <summary>
+    /// Usa stamina y notifica el cambio
+    /// </summary>
+    public void UseStamina(float amount)
+    {
+        currentStamina -= amount;
+        currentStamina = Mathf.Max(0, currentStamina);
+        staminaRegenTimer = staminaRegenDelay; // Resetear el delay de regeneración
+        OnStaminaChanged?.Invoke(currentStamina);
+    }
+
+    /// <summary>
+    /// Regenera stamina gradualmente
+    /// </summary>
+    private void RegenerateStamina()
+    {
+        if (currentStamina >= maxStamina) return;
+
+        // Esperar el delay antes de regenerar
+        if (staminaRegenTimer > 0)
+        {
+            staminaRegenTimer -= Time.deltaTime;
+            return;
+        }
+
+        currentStamina += staminaRegenRate * Time.deltaTime;
+        currentStamina = Mathf.Min(currentStamina, maxStamina);
+        OnStaminaChanged?.Invoke(currentStamina);
+    }
+
+    /// <summary>
+    /// Resetea la stamina al máximo
+    /// </summary>
+    public void ResetStamina()
+    {
+        currentStamina = maxStamina;
+        OnStaminaChanged?.Invoke(currentStamina);
+    }
+
+    /// <summary>
     /// Cura al jugador
     /// </summary>
     public void Heal(float amount)
@@ -748,7 +832,9 @@ public class Player : MonoBehaviour
     public void ResetHealth()
     {
         currentHealth = maxHealth;
+        currentStamina = maxStamina;
         OnHealthChanged?.Invoke(currentHealth);
+        OnStaminaChanged?.Invoke(currentStamina);
     }
 
     /// <summary>

@@ -27,6 +27,14 @@ public class MatchUI : MonoBehaviour
     [SerializeField] private Player player1;
     [SerializeField] private Player player2;
 
+    [Header("Referencias de Barras de Stamina")]
+    [SerializeField] private Image player1StaminaBar;
+    [SerializeField] private Image player2StaminaBar;
+    [SerializeField] private float lowStaminaThreshold = 0.25f; // 25% de stamina para parpadear
+    [SerializeField] private float staminaBlinkSpeed = 8f; // Velocidad de parpadeo
+    private bool isPlayer1StaminaLow = false;
+    private bool isPlayer2StaminaLow = false;
+
     [Header("Paneles de Fin de Ronda/Match")]
     [SerializeField] private GameObject roundEndPanel;
     [SerializeField] private TextMeshProUGUI roundEndText;
@@ -60,16 +68,57 @@ public class MatchUI : MonoBehaviour
         if (player1 != null)
         {
             player1.OnHealthChanged.AddListener((_) => UpdateHealthBars());
+            player1.OnStaminaChanged.AddListener((_) => UpdateStaminaBars());
         }
         if (player2 != null)
         {
             player2.OnHealthChanged.AddListener((_) => UpdateHealthBars());
+            player2.OnStaminaChanged.AddListener((_) => UpdateStaminaBars());
         }
 
         // Inicializar UI
         UpdatePoints(0, 0);
         UpdateHealthBars();
+        UpdateStaminaBars();
         HideEndPanels();
+    }
+
+    private void Update()
+    {
+        // Parpadeo de barras de stamina cuando están bajas
+        BlinkLowStaminaBars();
+    }
+
+    private void BlinkLowStaminaBars()
+    {
+        float alpha = (Mathf.Sin(Time.time * staminaBlinkSpeed) + 1f) / 2f; // Oscila entre 0 y 1
+        alpha = Mathf.Lerp(0.3f, 1f, alpha); // Oscila entre 0.3 y 1 para que no desaparezca completamente
+
+        if (isPlayer1StaminaLow && player1StaminaBar != null)
+        {
+            Color color = player1StaminaBar.color;
+            color.a = alpha;
+            player1StaminaBar.color = color;
+        }
+        else if (player1StaminaBar != null)
+        {
+            Color color = player1StaminaBar.color;
+            color.a = 1f;
+            player1StaminaBar.color = color;
+        }
+
+        if (isPlayer2StaminaLow && player2StaminaBar != null)
+        {
+            Color color = player2StaminaBar.color;
+            color.a = alpha;
+            player2StaminaBar.color = color;
+        }
+        else if (player2StaminaBar != null)
+        {
+            Color color = player2StaminaBar.color;
+            color.a = 1f;
+            player2StaminaBar.color = color;
+        }
     }
 
     private void UpdateTimer(float time)
@@ -91,7 +140,7 @@ public class MatchUI : MonoBehaviour
             }
             else
             {
-                timerText.color = Color.white;
+                timerText.color = Color.black;
             }
         }
     }
@@ -162,6 +211,22 @@ public class MatchUI : MonoBehaviour
         }
     }
 
+    private void UpdateStaminaBars()
+    {
+        if (player1StaminaBar != null && player1 != null)
+        {
+            float staminaRatio = player1.CurrentStamina / player1.MaxStamina;
+            player1StaminaBar.fillAmount = staminaRatio;
+            isPlayer1StaminaLow = staminaRatio <= lowStaminaThreshold;
+        }
+        if (player2StaminaBar != null && player2 != null)
+        {
+            float staminaRatio = player2.CurrentStamina / player2.MaxStamina;
+            player2StaminaBar.fillAmount = staminaRatio;
+            isPlayer2StaminaLow = staminaRatio <= lowStaminaThreshold;
+        }
+    }
+
     private void ShowRoundEnd(int winner)
     {
         // Ocultar el timer al finalizar la ronda
@@ -222,7 +287,7 @@ public class MatchUI : MonoBehaviour
         if (timerText != null)
         {
             timerText.gameObject.SetActive(false);
-            timerText.color = Color.white;
+            timerText.color = Color.black;
         }
     }
 

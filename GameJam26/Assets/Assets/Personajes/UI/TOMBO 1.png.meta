@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7c409f5f48cfe957393ce31c1ec616d3
+guid: b01d4fb3527388c44a0454b6905ca7b5
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -46,17 +46,17 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteBorder: {x: 0, y: 1010, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
-  spriteTessellationDetail: -1
+  spriteTessellationDetail: 0
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
@@ -116,10 +116,10 @@ TextureImporter:
       name: TOMBO_0
       rect:
         serializedVersion: 2
-        x: 87
-        y: 266
-        width: 810
-        height: 1527
+        x: 177
+        y: 1090
+        width: 720
+        height: 701
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,7 +134,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    outline: []
+    outline:
+    - - {x: 205.5, y: -923.5}
+      - {x: 212.5, y: -923.5}
+      - {x: 212.5, y: -903.5}
+      - {x: 205.5, y: -903.5}
     customData: 
     physicsShape: []
     bones: []

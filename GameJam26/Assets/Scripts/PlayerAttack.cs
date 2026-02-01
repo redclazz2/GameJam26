@@ -64,6 +64,10 @@ public class PlayerAttack : MonoBehaviour
         if (playerComponent.IsBlocking || !playerComponent.CanAttackAfterBlock)
             return;
 
+        // No puede atacar si no tiene suficiente stamina
+        if (!playerComponent.HasEnoughStamina(playerComponent.AttackStaminaCost))
+            return;
+
         // Determinar si se presionó el botón de ataque según el sistema de input
         bool attackPressed;
         if (useNewInputSystem && inputHandler != null)
@@ -156,6 +160,9 @@ public class PlayerAttack : MonoBehaviour
         Attack attack = attackGO.GetComponent<Attack>();
         attack.damage = playerComponent.GetDamage();
         attack.owner = gameObject;
+
+        // Gastar stamina al atacar
+        playerComponent.UseStamina(playerComponent.AttackStaminaCost);
 
         // Iniciar estado de ataque
         StartCoroutine(AttackingCoroutine());
