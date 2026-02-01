@@ -2076,6 +2076,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   countdownFX: {fileID: 828383394}
+  bellSFX: {fileID: 7922633278111433304, guid: 60010281533ed6a0cbd7d43dd776af1f, type: 3}
 --- !u!4 &1354111014
 Transform:
   m_ObjectHideFlags: 0
