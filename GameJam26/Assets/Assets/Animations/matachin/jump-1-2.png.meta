@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 12bdb2974fbb030c0a3c52cd3cec5fd0
+guid: e3858b4bf2a92834da6aefa05dbb02db
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3318921225075423997
-    second: PoliceIdle_0
+      213: -5713762871351548587
+    second: jump-1-2_0
   - first:
-      213: -8377702512932619263
-    second: PoliceIdle_1
+      213: -7348671197771487419
+    second: jump-1-2_1
   - first:
-      213: 8957987232473106391
-    second: PoliceIdle_2
+      213: -795974507939193583
+    second: jump-1-2_2
   - first:
-      213: -5756719005743802154
-    second: PoliceIdle_3
+      213: 5792476649730743104
+    second: jump-1-2_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -60,7 +60,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 48
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -105,106 +105,93 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PoliceIdle_0
+      name: jump-1-2_0
       rect:
         serializedVersion: 2
-        x: 53
-        y: 770
-        width: 383
-        height: 668
+        x: 1
+        y: 49
+        width: 451
+        height: 407
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 30500edeab2d0f1d0800000000000000
-      internalID: -3318921225075423997
+      spriteID: 555664af0f2a4b0b0800000000000000
+      internalID: -5713762871351548587
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PoliceIdle_1
+      name: jump-1-2_1
       rect:
         serializedVersion: 2
-        x: 519
-        y: 771
-        width: 391
-        height: 667
+        x: 133
+        y: 26
+        width: 86
+        height: 31
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 10cf0c293fb6cbb80800000000000000
-      internalID: -8377702512932619263
+      spriteID: 547afa50b76440a90800000000000000
+      internalID: -7348671197771487419
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PoliceIdle_2
+      name: jump-1-2_2
       rect:
         serializedVersion: 2
-        x: 55
-        y: 76
-        width: 378
-        height: 656
+        x: 78
+        y: 3
+        width: 41
+        height: 11
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7d74b0e2de9215c70800000000000000
-      internalID: 8957987232473106391
+      spriteID: 11d940cf66124f4f0800000000000000
+      internalID: -795974507939193583
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PoliceIdle_3
+      name: jump-1-2_3
       rect:
         serializedVersion: 2
-        x: 514
-        y: 76
-        width: 387
-        height: 652
+        x: 104
+        y: 2
+        width: 84
+        height: 23
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6d896ee80960c10b0800000000000000
-      internalID: -5756719005743802154
+      spriteID: 04b12f4b2d2036050800000000000000
+      internalID: 5792476649730743104
       vertices: []
       indices: 
       edges: []
@@ -214,23 +201,19 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries:
-      - key: SpriteEditor.SliceOnImport
-        value: True
-      - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":true,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+      entries: []
     nameFileIdTable:
-      PoliceIdle_0: 1629870722
-      PoliceIdle_1: 475266903
-      PoliceIdle_2: 105353395
-      PoliceIdle_3: -999107005
+      jump-1-2_0: -5713762871351548587
+      jump-1-2_1: -7348671197771487419
+      jump-1-2_2: -795974507939193583
+      jump-1-2_3: 5792476649730743104
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
