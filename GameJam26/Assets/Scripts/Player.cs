@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public enum FacingDirection
 {
@@ -12,6 +13,10 @@ public class Player : MonoBehaviour
     [Header("Identificación")]
     [SerializeField] private int playerNumber = 1; // 1 = Jugador 1 (WASD), 2 = Jugador 2 (Flechas)
     public int PlayerNumber => playerNumber;
+
+    [Header("Input System")]
+    [SerializeField] private bool useNewInputSystem = true; // Toggle para usar el nuevo sistema
+    private PlayerInputHandler inputHandler;
 
     [Header("Componentes")]
     private Rigidbody2D rb;
@@ -37,8 +42,11 @@ public class Player : MonoBehaviour
     [SerializeField] private float blockKnockbackReduction = 0.5f; // Reduce 50% del knockback
     [SerializeField] private float blockStunDuration = 0.15f; // Tiempo sin poder actuar después de bloquear
     [SerializeField] private float blockToAttackCooldown = 0.25f; // Tiempo sin poder atacar después de bloquear
+    [SerializeField] private float blockPushbackToAttacker = 5f; // Fuerza de empuje al atacante cuando bloqueas
+    [SerializeField] private float pushbackStunDuration = 0.1f; // Duración del stun cuando tu ataque es bloqueado
     private bool isBlocking = false;
     private bool isInBlockStun = false;
+    private bool isInPushbackStun = false; // Cuando tu ataque fue bloqueado
     private bool canAttackAfterBlock = true;
 
     // Eventos para el sistema de combate
@@ -85,6 +93,7 @@ public class Player : MonoBehaviour
     private bool isCrouching;
     private bool isDashing;
     private bool canDash = true;
+    private bool hasUsedAirDash = false; // Solo un air dash por salto
 
     // Variables para doble tap (dash)
     private float lastTapTimeLeft;
@@ -100,6 +109,14 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        inputHandler = GetComponent<PlayerInputHandler>();
+
+        // Verificar si se usa el nuevo Input System
+        if (useNewInputSystem && inputHandler == null)
+        {
+            Debug.LogWarning("Player: useNewInputSystem está activo pero no hay PlayerInputHandler. Usando input legacy.");
+            useNewInputSystem = false;
+        }
 
         // Inicializar eventos si son null
         OnDeath ??= new UnityEvent();
@@ -149,10 +166,70 @@ public class Player : MonoBehaviour
 
     private void CheckGrounded()
     {
+        bool wasGrounded = isGrounded;
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        
+        // Resetear air dash cuando toca el suelo
+        if (isGrounded && !wasGrounded)
+        {
+            hasUsedAirDash = false;
+        }
     }
 
     private void HandleInput()
+    {
+        if (useNewInputSystem && inputHandler != null)
+        {
+            HandleInputNewSystem();
+        }
+        else
+        {
+            HandleInputLegacy();
+        }
+    }
+
+    /// <summary>
+    /// Manejo de input usando el nuevo Input System
+    /// </summary>
+    private void HandleInputNewSystem()
+    {
+        // Input horizontal desde el InputHandler
+        horizontalInput = inputHandler.HorizontalInput;
+
+        // Fast Fall (solo en el aire con input hacia abajo)
+        bool downInput = inputHandler.VerticalInput < -0.5f;
+        
+        if (!isGrounded)
+        {
+            if (downInput)
+            {
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, -fastFallForce);
+            }
+        }
+
+        isCrouching = false;
+
+        // Salto (solo si está en el suelo y no bloqueando)
+        if (inputHandler.JumpPressed && isGrounded && !isBlocking)
+        {
+            Jump();
+        }
+
+        // Flip del sprite según dirección
+        if (horizontalInput > 0.1f && !isFacingRight)
+        {
+            Flip();
+        }
+        else if (horizontalInput < -0.1f && isFacingRight)
+        {
+            Flip();
+        }
+    }
+
+    /// <summary>
+    /// Manejo de input usando el sistema legacy (Input.GetKey)
+    /// </summary>
+    private void HandleInputLegacy()
     {
         // Input horizontal según el jugador
         if (playerNumber == 1)
@@ -228,10 +305,19 @@ public class Player : MonoBehaviour
             return;
         }
 
-        // Tecla de bloqueo: S (P1) o DownArrow (P2)
-        KeyCode blockKey = playerNumber == 1 ? KeyCode.S : KeyCode.DownArrow;
         bool wasBlocking = isBlocking;
-        isBlocking = Input.GetKey(blockKey);
+
+        // Determinar si está bloqueando según el sistema de input
+        if (useNewInputSystem && inputHandler != null)
+        {
+            isBlocking = inputHandler.BlockHeld;
+        }
+        else
+        {
+            // Tecla de bloqueo: S (P1) o DownArrow (P2) - Sistema legacy
+            KeyCode blockKey = playerNumber == 1 ? KeyCode.S : KeyCode.DownArrow;
+            isBlocking = Input.GetKey(blockKey);
+        }
 
         // Si dejó de bloquear, iniciar cooldown para atacar
         if (wasBlocking && !isBlocking)
@@ -264,8 +350,27 @@ public class Player : MonoBehaviour
 
     private void HandleDoubleTapDash()
     {
-        if (!isGrounded || isBlocking || !canDash) return;
+        // Puede hacer dash en el suelo o en el aire, pero no mientras bloquea
+        if (isBlocking || !canDash) return;
+        
+        // En el aire, solo puede hacer un dash por salto
+        if (!isGrounded && hasUsedAirDash) return;
 
+        // Usar nuevo Input System si está activo
+        if (useNewInputSystem && inputHandler != null)
+        {
+            if (inputHandler.DashRightTriggered)
+            {
+                StartCoroutine(PerformDash(1));
+            }
+            else if (inputHandler.DashLeftTriggered)
+            {
+                StartCoroutine(PerformDash(-1));
+            }
+            return;
+        }
+
+        // Sistema legacy
         // Teclas según jugador
         KeyCode rightKey = playerNumber == 1 ? KeyCode.D : KeyCode.RightArrow;
         KeyCode leftKey = playerNumber == 1 ? KeyCode.A : KeyCode.LeftArrow;
@@ -313,14 +418,14 @@ public class Player : MonoBehaviour
 
     private void ApplyMovement()
     {
-        // No aplicar movimiento durante hitstun o blockstun (para que funcione el knockback)
-        if (isInHitstun || isInBlockStun) return;
+        // No aplicar movimiento durante hitstun, blockstun o pushback stun (para que funcione el knockback)
+        if (isInHitstun || isInBlockStun || isInPushbackStun) return;
 
         // No moverse mientras ataca
         PlayerAttack playerAttack = GetComponent<PlayerAttack>();
         if (playerAttack != null && playerAttack.IsAttacking)
         {
-            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            rb.linearVelocity = Vector2.zero;
             return;
         }
 
@@ -356,9 +461,18 @@ public class Player : MonoBehaviour
         // Salto corto si sueltas el botón de salto
         else if (rb.linearVelocity.y > 0)
         {
-            bool holdingJump = playerNumber == 1 
-                ? Input.GetKey(KeyCode.W)
-                : Input.GetKey(KeyCode.UpArrow);
+            bool holdingJump;
+            
+            if (useNewInputSystem && inputHandler != null)
+            {
+                holdingJump = inputHandler.JumpHeld;
+            }
+            else
+            {
+                holdingJump = playerNumber == 1 
+                    ? Input.GetKey(KeyCode.W)
+                    : Input.GetKey(KeyCode.UpArrow);
+            }
             
             if (!holdingJump)
             {
@@ -372,6 +486,12 @@ public class Player : MonoBehaviour
         isDashing = true;
         canDash = false;
         currentState = PlayerState.Dashing;
+        
+        // Marcar que usó el air dash si está en el aire
+        if (!isGrounded)
+        {
+            hasUsedAirDash = true;
+        }
 
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0;
@@ -485,7 +605,7 @@ public class Player : MonoBehaviour
     /// </summary>
     public void TakeDamage(float damage)
     {
-        TakeDamage(damage, Vector2.zero);
+        TakeDamage(damage, Vector2.zero, out _);
     }
 
     /// <summary>
@@ -493,6 +613,16 @@ public class Player : MonoBehaviour
     /// </summary>
     public void TakeDamage(float damage, Vector2 attackerPosition)
     {
+        TakeDamage(damage, attackerPosition, out _);
+    }
+
+    /// <summary>
+    /// Aplica daño al jugador con knockback desde una dirección.
+    /// Devuelve si el jugador bloqueó el ataque.
+    /// </summary>
+    public void TakeDamage(float damage, Vector2 attackerPosition, out bool wasBlocked)
+    {
+        wasBlocked = false;
         if (IsDead) return;
 
         float finalDamage = damage;
@@ -501,6 +631,7 @@ public class Player : MonoBehaviour
         // Si está bloqueando, reducir daño y knockback
         if (isBlocking)
         {
+            wasBlocked = true;
             finalDamage = damage * (1f - blockDamageReduction);
             finalKnockbackMultiplier = 1f - blockKnockbackReduction;
             
@@ -518,6 +649,15 @@ public class Player : MonoBehaviour
 
         // Efecto visual de daño (sprite rojo)
         StartCoroutine(DamageFlashCoroutine());
+
+        // Vibración del mando al recibir daño
+        if (inputHandler != null)
+        {
+            if (wasBlocked)
+                inputHandler.RumbleOnBlocked();
+            else
+                inputHandler.RumbleOnDamageTaken();
+        }
 
         // Aplicar knockback si hay posición del atacante
         if (attackerPosition != Vector2.zero && rb != null)
@@ -595,6 +735,33 @@ public class Player : MonoBehaviour
             isInDamageFlash = false;
         }
     }
+
+    /// <summary>
+    /// Aplica knockback externo al jugador (usado cuando tu ataque es bloqueado)
+    /// </summary>
+    public void ApplyExternalKnockback(Vector2 direction, float force)
+    {
+        if (rb != null && !IsDead)
+        {
+            rb.linearVelocity = new Vector2(direction.x * force, rb.linearVelocity.y);
+            StartCoroutine(PushbackStunCoroutine());
+        }
+    }
+
+    /// <summary>
+    /// Corrutina de pushback stun (breve pausa cuando tu ataque es bloqueado)
+    /// </summary>
+    private System.Collections.IEnumerator PushbackStunCoroutine()
+    {
+        isInPushbackStun = true;
+        yield return new WaitForSeconds(pushbackStunDuration);
+        isInPushbackStun = false;
+    }
+
+    /// <summary>
+    /// Obtiene la fuerza de pushback que recibe el atacante al ser bloqueado
+    /// </summary>
+    public float GetBlockPushbackForce() => blockPushbackToAttacker;
 
     /// <summary>
     /// Cura al jugador

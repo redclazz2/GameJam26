@@ -116,7 +116,7 @@ public class MatchUI : MonoBehaviour
             countdownText.text = countdownValue;
 
             // Color especial para "GO!"
-            countdownText.color = countdownValue == "GO!" ? Color.green : Color.white;
+            countdownText.color = countdownValue == "GO!" ? Color.green : Color.black;
         }
     }
 
