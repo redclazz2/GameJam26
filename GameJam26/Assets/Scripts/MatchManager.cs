@@ -1,4 +1,5 @@
 using System;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -42,6 +43,7 @@ public class MatchManager : MonoBehaviour
     public bool IsRoundActive => isRoundActive;
     public bool IsMatchOver => isMatchOver;
     public CountdownTextFX countdownFX;
+    public GameObject bellSFX;
 
     private void Awake()
     {
@@ -140,7 +142,7 @@ public class MatchManager : MonoBehaviour
         countdownFX.StopBlink();
         OnCountdownChanged?.Invoke("¡YA!");
         countdownFX.Shake();
-
+        Instantiate(bellSFX, transform.position, quaternion.identity);
         // Activar la ronda
         currentTime = roundTime;
         isRoundActive = true;
