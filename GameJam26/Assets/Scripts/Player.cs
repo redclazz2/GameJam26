@@ -611,9 +611,9 @@ public class Player : MonoBehaviour
 
         // Actualizar parámetros del Animator
         animator.SetBool("IsGrounded", isGrounded);
-        animator.SetBool("IsCrouching", isCrouching);
-        animator.SetBool("IsDashing", isDashing);
-        animator.SetBool("IsBlocking", isBlocking);
+        //animator.SetBool("IsCrouching", isCrouching);
+        //animator.SetBool("IsDashing", isDashing);
+        //animator.SetBool("IsBlocking", isBlocking);
         animator.SetFloat("Speed", Mathf.Abs(horizontalInput));
         animator.SetFloat("VerticalVelocity", rb.linearVelocity.y);
     }
