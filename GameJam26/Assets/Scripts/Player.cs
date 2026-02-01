@@ -98,6 +98,10 @@ public class Player : MonoBehaviour
     [Header("Rebote en Cabeza")]
     [SerializeField] private float headBounceMultiplier = 0.5f; // 50% de la fuerza de salto
 
+    [Header("Flip Estilo Paper Mario")]
+    [SerializeField] private float flipDuration = 0.15f; // Duración de la animación de giro
+    private bool isFlipping = false;
+
     // Estados del personaje
     public enum PlayerState { Idle, Walking, Jumping, Crouching, Dashing, Blocking }
     public PlayerState currentState = PlayerState.Idle;
@@ -526,16 +530,42 @@ public class Player : MonoBehaviour
 
     private void Flip()
     {
-        isFacingRight = !isFacingRight;
+        // No iniciar otro flip si ya está girando
+        if (isFlipping) return;
         
-        // Opción 1: Flip con escala
-        Vector3 scale = transform.localScale;
-        scale.x *= -1;
-        transform.localScale = scale;
+        isFacingRight = !isFacingRight;
+        StartCoroutine(PaperMarioFlipCoroutine());
+    }
 
-        // Opción 2: Si prefieres usar SpriteRenderer
-        // if (spriteRenderer != null)
-        //     spriteRenderer.flipX = !isFacingRight;
+    /// <summary>
+    /// Corrutina que anima el flip estilo Paper Mario (como una hoja de papel girando)
+    /// </summary>
+    private System.Collections.IEnumerator PaperMarioFlipCoroutine()
+    {
+        isFlipping = true;
+        
+        Vector3 startScale = transform.localScale;
+        Vector3 endScale = new Vector3(-startScale.x, startScale.y, startScale.z);
+        
+        float elapsed = 0f;
+        
+        while (elapsed < flipDuration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / flipDuration;
+            
+            // Usar curva sinusoidal para efecto más natural (como papel girando)
+            // Va de 1 -> 0 -> -1 (o viceversa)
+            float scaleX = Mathf.Lerp(startScale.x, endScale.x, t);
+            
+            transform.localScale = new Vector3(scaleX, startScale.y, startScale.z);
+            
+            yield return null;
+        }
+        
+        // Asegurar escala final exacta
+        transform.localScale = endScale;
+        isFlipping = false;
     }
 
     private void UpdateState()
