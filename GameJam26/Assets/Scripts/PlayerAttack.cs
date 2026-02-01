@@ -27,6 +27,7 @@ public class PlayerAttack : MonoBehaviour
     private Transform playerTransform;
     private Player playerComponent;
     private PlayerInputHandler inputHandler;
+    private Animator animator;
     private KeyCode keyMeleeToCheck;
     void Start()
     {
@@ -39,6 +40,7 @@ public class PlayerAttack : MonoBehaviour
 
         playerComponent = gameObject.GetComponent<Player>();
         inputHandler = gameObject.GetComponent<PlayerInputHandler>();
+        animator = gameObject.GetComponent<Animator>();
 
         // Verificar si se usa el nuevo Input System
         if (useNewInputSystem && inputHandler == null)
@@ -120,14 +122,18 @@ public class PlayerAttack : MonoBehaviour
 
     private void SpawnMeleeAttack()
     {
+        if (animator != null) animator.SetTrigger("MeleeAttack");
         SpawnAttack(meleeAttack, 2f);
     }
     private void SpawnLongAttack()
     {
+        if (animator != null) animator.SetTrigger("LongAttack");
         SpawnAttack(longAttack, 3f);
     }
     private void SpawnUpAttack()
     {
+        if (animator != null) animator.SetTrigger("UpAttack");
+        
         float direction = playerComponent.FacingDirection;
         Vector3 spawnPosition = new Vector3(
             playerTransform.position.x + 2f * direction,
