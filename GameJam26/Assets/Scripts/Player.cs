@@ -77,10 +77,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float dashCooldown = 0.5f;
     [SerializeField] private float doubleTapTime = 0.25f;
 
-    [Header("Detección de Suelo")]
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private float groundCheckRadius = 0.2f;
-    [SerializeField] private LayerMask groundLayer;
+    [Header("Rebote en Cabeza")]
+    [SerializeField] private float headBounceMultiplier = 0.5f; // 50% de la fuerza de salto
 
     // Estados del personaje
     public enum PlayerState { Idle, Walking, Jumping, Crouching, Dashing, Blocking }
@@ -132,15 +130,6 @@ public class Player : MonoBehaviour
             rb.freezeRotation = true;
             rb.interpolation = RigidbodyInterpolation2D.Interpolate;
         }
-
-        // Crear groundCheck si no existe
-        if (groundCheck == null)
-        {
-            GameObject gc = new GameObject("GroundCheck");
-            gc.transform.SetParent(transform);
-            gc.transform.localPosition = new Vector3(0, -0.5f, 0);
-            groundCheck = gc.transform;
-        }
     }
 
     void Update()
@@ -148,7 +137,6 @@ public class Player : MonoBehaviour
         // No procesar input durante dash o blockstun
         if (isDashing || isInBlockStun) return;
 
-        CheckGrounded();
         HandleInput();
         HandleBlockInput();
         HandleDoubleTapDash();
@@ -162,18 +150,6 @@ public class Player : MonoBehaviour
 
         ApplyMovement();
         ApplyBetterJump();
-    }
-
-    private void CheckGrounded()
-    {
-        bool wasGrounded = isGrounded;
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-        
-        // Resetear air dash cuando toca el suelo
-        if (isGrounded && !wasGrounded)
-        {
-            hasUsedAirDash = false;
-        }
     }
 
     private void HandleInput()
@@ -562,16 +538,6 @@ public class Player : MonoBehaviour
         animator.SetFloat("VerticalVelocity", rb.linearVelocity.y);
     }
 
-    // Debug: Visualizar groundCheck en el editor
-    private void OnDrawGizmosSelected()
-    {
-        if (groundCheck != null)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
-        }
-    }
-
     // Métodos públicos para otros scripts (ej: sistema de combate)
     public bool IsGrounded() => isGrounded;
     public bool IsCrouching() => isCrouching;
@@ -795,5 +761,45 @@ public class Player : MonoBehaviour
         
         // Deshabilitar movimiento al morir
         SetMovementEnabled(false);
+    }
+
+    /// <summary>
+    /// Detecta colisión con otro jugador para el rebote en la cabeza
+    /// </summary>
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Detectar suelo
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+            hasUsedAirDash = false;
+            return;
+        }
+
+        // Verificar si colisionamos con otro jugador
+        Player otherPlayer = collision.gameObject.GetComponent<Player>();
+        if (otherPlayer == null) return;
+
+        // Verificar si estamos cayendo y estamos por encima del otro jugador
+        if (rb.linearVelocity.y < 0 && transform.position.y > otherPlayer.transform.position.y)
+        {
+            // Aplicar rebote (50% de la fuerza de salto)
+            float bounceForce = jumpForce * headBounceMultiplier;
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, bounceForce);
+            
+            // Resetear air dash al rebotar
+            hasUsedAirDash = false;
+        }
+    }
+
+    /// <summary>
+    /// Detecta cuando deja de tocar el suelo
+    /// </summary>
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = false;
+        }
     }
 }
