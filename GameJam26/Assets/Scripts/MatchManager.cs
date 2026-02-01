@@ -41,6 +41,7 @@ public class MatchManager : MonoBehaviour
     public int Player2Points => player2Points;
     public bool IsRoundActive => isRoundActive;
     public bool IsMatchOver => isMatchOver;
+    public CountdownTextFX countdownFX;
 
     private void Awake()
     {
@@ -129,21 +130,21 @@ public class MatchManager : MonoBehaviour
     /// </summary>
     private System.Collections.IEnumerator CountdownCoroutine()
     {
-        // Mostrar números de cuenta regresiva
-        for (int i = countdownSeconds; i > 0; i--)
-        {
-            OnCountdownChanged?.Invoke(i.ToString());
-            yield return new WaitForSeconds(1f);
-        }
+        // LISTOS?
+        OnCountdownChanged?.Invoke("LISTOS?");
+        countdownFX.StartBlink();
 
-        // Mostrar "GO!"
-        OnCountdownChanged?.Invoke("GO!");
-        
+        yield return new WaitForSeconds(countdownSeconds);
+
+        // YA!
+        countdownFX.StopBlink();
+        OnCountdownChanged?.Invoke("¡YA!");
+        countdownFX.Shake();
+
         // Activar la ronda
         currentTime = roundTime;
         isRoundActive = true;
 
-        // Habilitar el movimiento de los jugadores
         player1?.SetMovementEnabled(true);
         player2?.SetMovementEnabled(true);
 
@@ -151,7 +152,6 @@ public class MatchManager : MonoBehaviour
 
         Debug.Log("¡Ronda iniciada!");
 
-        // Ocultar el countdown después de un momento
         yield return new WaitForSeconds(0.5f);
         OnCountdownChanged?.Invoke("");
     }
@@ -269,7 +269,7 @@ public class MatchManager : MonoBehaviour
         player1Points = 0;
         player2Points = 0;
         isMatchOver = false;
-        
+
         OnPointsChanged?.Invoke(player1Points, player2Points);
         StartRound();
     }
