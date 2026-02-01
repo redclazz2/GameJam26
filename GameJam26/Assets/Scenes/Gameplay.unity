@@ -772,39 +772,21 @@ MonoBehaviour:
   - {fileID: 1422077721}
   - {fileID: 1704690559}
   stageBaseY: 0
-  minCameraY: 2
-  minZoom: 9.5
-  maxZoom: 14
-  zoomLimiter: 10
-  maxYOffset: 5.2
+  minCameraY: 2.3
+  minZoom: 9
+  maxZoom: 13.5
+  zoomLimiter: 8
+  maxYOffset: 1.2
   closeDeadZone: 2.8
-  offsetStartDistance: 5.5
-  offsetFullDistance: 10
+  offsetStartDistance: 3.5
+  offsetFullDistance: 8
   offsetCurve:
     serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
+    m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  smoothTime: 0.26
+  smoothTime: 0.12
 --- !u!114 &222794022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2267,7 +2249,7 @@ Transform:
   m_GameObject: {fileID: 826819344}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.3, y: 8.9, z: 2.36}
+  m_LocalPosition: {x: 0.3, y: 8, z: 2.36}
   m_LocalScale: {x: 4.8778777, y: 3.6342573, z: 3.6342573}
   m_ConstrainProportionsScale: 0
   m_Children: []
