@@ -3586,7 +3586,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7277471379267772093, guid: 5a7005d9e33d1d4e7a2d74347a4da0ac, type: 3}
       propertyPath: upAttackHorizontalOffSet
-      value: 0.5
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7277471379267772093, guid: 5a7005d9e33d1d4e7a2d74347a4da0ac, type: 3}
       propertyPath: meleeAttackCooldownDefault
@@ -3838,6 +3838,10 @@ PrefabInstance:
       value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 8425417611615109160, guid: 0670b58b363ca94358fd402e35c2f385, type: 3}
+      propertyPath: upAttackHorizontalOffSet
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8425417611615109160, guid: 0670b58b363ca94358fd402e35c2f385, type: 3}
       propertyPath: meleeAttackCooldownDefault
       value: 0.28
       objectReference: {fileID: 0}
@@ -3858,6 +3862,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6810345308720141323, guid: 0670b58b363ca94358fd402e35c2f385, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5893560835533482761}
+    - targetCorrespondingSourceObject: {fileID: 6810345308720141323, guid: 0670b58b363ca94358fd402e35c2f385, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5893560835533482762}
   m_SourcePrefab: {fileID: 100100000, guid: 0670b58b363ca94358fd402e35c2f385, type: 3}
 --- !u!1 &5893560835533482755 stripped
 GameObject:
@@ -3917,6 +3924,28 @@ CapsuleCollider2D:
   m_Offset: {x: -2.8483474, y: -0.91881895}
   m_Size: {x: 8.428163, y: 18.03234}
   m_Direction: 0
+--- !u!95 &5893560835533482762
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5893560835533482755}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 308dca16c2a2bb04292a746499f2babd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
