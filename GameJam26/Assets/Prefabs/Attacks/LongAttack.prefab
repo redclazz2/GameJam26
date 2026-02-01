@@ -107,6 +107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Attack
   owner: {fileID: 0}
   damage: 0
+  hitSoundPrefab: {fileID: 7922633278111433304, guid: d25bde9e3e81a2d139e06b39d44ab1ac, type: 3}
 --- !u!61 &2565387730235440393
 BoxCollider2D:
   m_ObjectHideFlags: 0

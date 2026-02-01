@@ -4,6 +4,7 @@ public class Attack : MonoBehaviour
 {
     public GameObject owner;
     public float damage;
+    public GameObject hitSoundPrefab;
 
     void Start()
     {
@@ -50,6 +51,7 @@ public class Attack : MonoBehaviour
             
             // Activar HitStop para dar impacto al golpe
             HitStop.Instance?.TriggerHitStop();
+            Instantiate(hitSoundPrefab, transform.position, Quaternion.identity);
 
             ScreenShakeManager.Instance?.TriggerShake();
 
