@@ -329,6 +329,12 @@ public class Player : MonoBehaviour
             isBlocking = Input.GetKey(blockKey);
         }
 
+        // Romper el bloqueo si no tiene stamina
+        if (isBlocking && currentStamina <= 0)
+        {
+            isBlocking = false;
+        }
+
         // Si dejó de bloquear, iniciar cooldown para atacar
         if (wasBlocking && !isBlocking)
         {
