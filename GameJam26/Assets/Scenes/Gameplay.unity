@@ -3538,7 +3538,7 @@ PrefabInstance:
       objectReference: {fileID: 440952273}
     - target: {fileID: 6564721898488470875, guid: 5a7005d9e33d1d4e7a2d74347a4da0ac, type: 3}
       propertyPath: blockDamageReduction
-      value: 1
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 6564721898488470875, guid: 5a7005d9e33d1d4e7a2d74347a4da0ac, type: 3}
       propertyPath: headBounceMultiplier
@@ -3743,7 +3743,7 @@ PrefabInstance:
       objectReference: {fileID: 1783738411}
     - target: {fileID: 5406939474042176462, guid: 0670b58b363ca94358fd402e35c2f385, type: 3}
       propertyPath: blockDamageReduction
-      value: 1
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 5406939474042176462, guid: 0670b58b363ca94358fd402e35c2f385, type: 3}
       propertyPath: headBounceMultiplier
