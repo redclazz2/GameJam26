@@ -124,9 +124,10 @@ public class PlayerAttack : MonoBehaviour
     }
     private void SpawnUpAttack()
     {
+        float direction = playerComponent.FacingDirection;
         Vector3 spawnPosition = new Vector3(
-            playerTransform.position.x,
-            playerTransform.position.y + 2f,
+            playerTransform.position.x + 2f * direction,
+            playerTransform.position.y + 3f,
             playerTransform.position.z
         );
 
