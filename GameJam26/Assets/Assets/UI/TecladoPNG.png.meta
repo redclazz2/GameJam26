@@ -1,0 +1,1859 @@
+fileFormatVersion: 2
+guid: ce7149533b0148549ab746aacef4a443
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3157601637324105667
+    second: TecladoPNG_0
+  - first:
+      213: -6867720321199017841
+    second: TecladoPNG_1
+  - first:
+      213: 6050299698810041479
+    second: TecladoPNG_2
+  - first:
+      213: 4791492669004342338
+    second: TecladoPNG_3
+  - first:
+      213: -8250278438552513117
+    second: TecladoPNG_4
+  - first:
+      213: -8827571507780793443
+    second: TecladoPNG_5
+  - first:
+      213: 4175176017179476093
+    second: TecladoPNG_6
+  - first:
+      213: -8293081341262487580
+    second: TecladoPNG_7
+  - first:
+      213: -1138884886181198481
+    second: TecladoPNG_8
+  - first:
+      213: 6047449355623658640
+    second: TecladoPNG_9
+  - first:
+      213: 6714367580133097481
+    second: TecladoPNG_10
+  - first:
+      213: 5865784602446532537
+    second: TecladoPNG_11
+  - first:
+      213: -1961159594887854732
+    second: TecladoPNG_12
+  - first:
+      213: -6593907397433284756
+    second: TecladoPNG_13
+  - first:
+      213: -1154839335241253410
+    second: TecladoPNG_14
+  - first:
+      213: -2263198870210545418
+    second: TecladoPNG_15
+  - first:
+      213: -5567483851580484099
+    second: TecladoPNG_16
+  - first:
+      213: 9025387616269673065
+    second: TecladoPNG_17
+  - first:
+      213: 2724371960348809080
+    second: TecladoPNG_18
+  - first:
+      213: -9197811876208812736
+    second: TecladoPNG_19
+  - first:
+      213: -6413755309781452083
+    second: TecladoPNG_20
+  - first:
+      213: 29276720887512771
+    second: TecladoPNG_21
+  - first:
+      213: 7948839177963288820
+    second: TecladoPNG_22
+  - first:
+      213: -880360193042926441
+    second: TecladoPNG_23
+  - first:
+      213: 4504638151689320140
+    second: TecladoPNG_24
+  - first:
+      213: 7098769077220044942
+    second: TecladoPNG_25
+  - first:
+      213: 7929383691290643317
+    second: TecladoPNG_26
+  - first:
+      213: -6703747043242034320
+    second: TecladoPNG_27
+  - first:
+      213: 3967378730574090817
+    second: TecladoPNG_28
+  - first:
+      213: -7993764940315261980
+    second: TecladoPNG_29
+  - first:
+      213: 384300028990967097
+    second: TecladoPNG_30
+  - first:
+      213: -9051835354315496860
+    second: TecladoPNG_31
+  - first:
+      213: 1936024314846675002
+    second: TecladoPNG_32
+  - first:
+      213: 4389087554806592734
+    second: TecladoPNG_33
+  - first:
+      213: -4210474048587643923
+    second: TecladoPNG_34
+  - first:
+      213: -864552080638488635
+    second: TecladoPNG_35
+  - first:
+      213: -603000360299125700
+    second: TecladoPNG_36
+  - first:
+      213: 8746382436903276875
+    second: TecladoPNG_37
+  - first:
+      213: -1775958298215723667
+    second: TecladoPNG_38
+  - first:
+      213: 3580583968282087540
+    second: TecladoPNG_39
+  - first:
+      213: 3559859858616818053
+    second: TecladoPNG_40
+  - first:
+      213: 4614043065191272491
+    second: TecladoPNG_41
+  - first:
+      213: 189848289389558508
+    second: TecladoPNG_42
+  - first:
+      213: 4719270528766297820
+    second: TecladoPNG_43
+  - first:
+      213: 6615302224013111084
+    second: TecladoPNG_44
+  - first:
+      213: 6235301193391843607
+    second: TecladoPNG_45
+  - first:
+      213: 2579726655897097435
+    second: TecladoPNG_46
+  - first:
+      213: -3166189627333344802
+    second: TecladoPNG_47
+  - first:
+      213: 622525805758668751
+    second: TecladoPNG_48
+  - first:
+      213: -4106050924244669628
+    second: TecladoPNG_49
+  - first:
+      213: -1292472205500599264
+    second: TecladoPNG_50
+  - first:
+      213: -6927326294909934165
+    second: TecladoPNG_51
+  - first:
+      213: -2568206316329758615
+    second: TecladoPNG_52
+  - first:
+      213: 8304354448073277747
+    second: TecladoPNG_53
+  - first:
+      213: 5313585505590272225
+    second: TecladoPNG_54
+  - first:
+      213: 99369128789375844
+    second: TecladoPNG_55
+  - first:
+      213: 2508356800439618804
+    second: TecladoPNG_56
+  - first:
+      213: -6438373600714644245
+    second: TecladoPNG_57
+  - first:
+      213: -1656577724974415319
+    second: TecladoPNG_58
+  - first:
+      213: 3877241203218381269
+    second: TecladoPNG_59
+  - first:
+      213: 4017858558516132497
+    second: TecladoPNG_60
+  - first:
+      213: 6938756832350466441
+    second: TecladoPNG_61
+  - first:
+      213: 4189414894809346439
+    second: TecladoPNG_62
+  - first:
+      213: -6516640559479626667
+    second: TecladoPNG_63
+  - first:
+      213: -8085126788951669165
+    second: TecladoPNG_64
+  - first:
+      213: -6935661682814636201
+    second: TecladoPNG_65
+  - first:
+      213: 6917278190871501908
+    second: TecladoPNG_66
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: TecladoPNG_0
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 523
+        width: 36
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c725ee95fd02db20800000000000000
+      internalID: 3157601637324105667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_1
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 523
+        width: 21
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f80733e21c4f0b0a0800000000000000
+      internalID: -6867720321199017841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_2
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 523
+        width: 29
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 784b93c258bf6f350800000000000000
+      internalID: 6050299698810041479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_3
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 513
+        width: 32
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24464ef223dce7240800000000000000
+      internalID: 4791492669004342338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_4
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 523
+        width: 32
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a55304d87f118d80800000000000000
+      internalID: -8250278438552513117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_5
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 523
+        width: 26
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9bcd51fb7a2e7580800000000000000
+      internalID: -8827571507780793443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_6
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 87
+        width: 2074
+        height: 711
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7086b2777431f930800000000000000
+      internalID: 4175176017179476093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 424
+        width: 45
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ef11a0757e09ec80800000000000000
+      internalID: -8293081341262487580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_8
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 424
+        width: 28
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f65cb17ea3ed130f0800000000000000
+      internalID: -1138884886181198481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_9
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 424
+        width: 29
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 094fc1fe52bdce350800000000000000
+      internalID: 6047449355623658640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_10
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 424
+        width: 18
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9008b396db93e2d50800000000000000
+      internalID: 6714367580133097481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_11
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 454
+        width: 14
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9bf08c58404776150800000000000000
+      internalID: 5865784602446532537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_12
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 424
+        width: 47
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4754cd63dbf88c4e0800000000000000
+      internalID: -1961159594887854732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_13
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 424
+        width: 18
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c672b26782cbd74a0800000000000000
+      internalID: -6593907397433284756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_14
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 454
+        width: 15
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eddfb424ebf29ffe0800000000000000
+      internalID: -1154839335241253410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_15
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 424
+        width: 27
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f8f8055e908790e0800000000000000
+      internalID: -2263198870210545418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_16
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 424
+        width: 33
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df552dd4fe25cb2b0800000000000000
+      internalID: -5567483851580484099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_17
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 424
+        width: 21
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 962a6fbe73e904d70800000000000000
+      internalID: 9025387616269673065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_18
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 424
+        width: 28
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87710a41dd9eec520800000000000000
+      internalID: 2724371960348809080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_19
+      rect:
+        serializedVersion: 2
+        x: 2372
+        y: 368
+        width: 36
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04d54b7a4deca5080800000000000000
+      internalID: -9197811876208812736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_20
+      rect:
+        serializedVersion: 2
+        x: 2406
+        y: 368
+        width: 21
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dca733cf683cdf6a0800000000000000
+      internalID: -6413755309781452083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_21
+      rect:
+        serializedVersion: 2
+        x: 2426
+        y: 368
+        width: 29
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ce30b4c503086000800000000000000
+      internalID: 29276720887512771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_22
+      rect:
+        serializedVersion: 2
+        x: 2453
+        y: 358
+        width: 32
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f8b53b1e13ff4e60800000000000000
+      internalID: 7948839177963288820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_23
+      rect:
+        serializedVersion: 2
+        x: 2482
+        y: 368
+        width: 32
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 794384b911558c3f0800000000000000
+      internalID: -880360193042926441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_24
+      rect:
+        serializedVersion: 2
+        x: 2513
+        y: 368
+        width: 26
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc63d194880b38e30800000000000000
+      internalID: 4504638151689320140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_25
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 269
+        width: 33
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e807a366dd4e38260800000000000000
+      internalID: 7098769077220044942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_26
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 269
+        width: 18
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57b872f9474da0e60800000000000000
+      internalID: 7929383691290643317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_27
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 269
+        width: 28
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07bbb77059187f2a0800000000000000
+      internalID: -6703747043242034320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_28
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 259
+        width: 32
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1421f457fe5fe0730800000000000000
+      internalID: 3967378730574090817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_29
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 269
+        width: 32
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e3898ab321701190800000000000000
+      internalID: -7993764940315261980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_30
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 269
+        width: 26
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93dcd2b17de455500800000000000000
+      internalID: 384300028990967097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_31
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 269
+        width: 28
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 462e3b434bb616280800000000000000
+      internalID: -9051835354315496860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_32
+      rect:
+        serializedVersion: 2
+        x: 2373
+        y: 266
+        width: 46
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3084fa5bd32eda10800000000000000
+      internalID: 1936024314846675002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_33
+      rect:
+        serializedVersion: 2
+        x: 2419
+        y: 266
+        width: 28
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed4b55070eb29ec30800000000000000
+      internalID: 4389087554806592734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_34
+      rect:
+        serializedVersion: 2
+        x: 2446
+        y: 266
+        width: 29
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de3ceed29246195c0800000000000000
+      internalID: -4210474048587643923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_35
+      rect:
+        serializedVersion: 2
+        x: 2474
+        y: 266
+        width: 18
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5cfc7b7967e7004f0800000000000000
+      internalID: -864552080638488635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_36
+      rect:
+        serializedVersion: 2
+        x: 2476
+        y: 296
+        width: 14
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3420fcfd56b1a7f0800000000000000
+      internalID: -603000360299125700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_37
+      rect:
+        serializedVersion: 2
+        x: 2491
+        y: 266
+        width: 47
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b41d55d6c74616970800000000000000
+      internalID: 8746382436903276875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_38
+      rect:
+        serializedVersion: 2
+        x: 2536
+        y: 266
+        width: 18
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6dc1f256578a57e0800000000000000
+      internalID: -1775958298215723667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_39
+      rect:
+        serializedVersion: 2
+        x: 2537
+        y: 296
+        width: 15
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47099edf52ac0b130800000000000000
+      internalID: 3580583968282087540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_40
+      rect:
+        serializedVersion: 2
+        x: 2553
+        y: 266
+        width: 27
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58917033ea9276130800000000000000
+      internalID: 3559859858616818053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_41
+      rect:
+        serializedVersion: 2
+        x: 2579
+        y: 266
+        width: 33
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b209417b8bf580040800000000000000
+      internalID: 4614043065191272491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_42
+      rect:
+        serializedVersion: 2
+        x: 2610
+        y: 266
+        width: 21
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ceab74a630a72a200800000000000000
+      internalID: 189848289389558508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_43
+      rect:
+        serializedVersion: 2
+        x: 2630
+        y: 266
+        width: 28
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd6c51aca873e7140800000000000000
+      internalID: 4719270528766297820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_44
+      rect:
+        serializedVersion: 2
+        x: 2372
+        y: 104
+        width: 33
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2f2728c2564ecb50800000000000000
+      internalID: 6615302224013111084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_45
+      rect:
+        serializedVersion: 2
+        x: 2404
+        y: 104
+        width: 18
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 719a0bb366d388650800000000000000
+      internalID: 6235301193391843607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_46
+      rect:
+        serializedVersion: 2
+        x: 2421
+        y: 104
+        width: 28
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd45a5eb9b70dc320800000000000000
+      internalID: 2579726655897097435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_47
+      rect:
+        serializedVersion: 2
+        x: 2449
+        y: 94
+        width: 32
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed105432f4f6f04d0800000000000000
+      internalID: -3166189627333344802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_48
+      rect:
+        serializedVersion: 2
+        x: 2478
+        y: 104
+        width: 32
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcf52cb0ce7a3a800800000000000000
+      internalID: 622525805758668751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_49
+      rect:
+        serializedVersion: 2
+        x: 2509
+        y: 104
+        width: 26
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44b6bbe60706407c0800000000000000
+      internalID: -4106050924244669628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_50
+      rect:
+        serializedVersion: 2
+        x: 2535
+        y: 104
+        width: 28
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 024321d7067301ee0800000000000000
+      internalID: -1292472205500599264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_51
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 1
+        width: 26
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba5aba4ff613ddf90800000000000000
+      internalID: -6927326294909934165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_52
+      rect:
+        serializedVersion: 2
+        x: 618
+        y: 11
+        width: 32
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 960104556f5eb5cd0800000000000000
+      internalID: -2568206316329758615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_53
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 1
+        width: 28
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 331c7564f5efe3370800000000000000
+      internalID: 8304354448073277747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_54
+      rect:
+        serializedVersion: 2
+        x: 676
+        y: 11
+        width: 29
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e06f506dd5adb940800000000000000
+      internalID: 5313585505590272225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_55
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 11
+        width: 31
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46b712732b7016100800000000000000
+      internalID: 99369128789375844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_56
+      rect:
+        serializedVersion: 2
+        x: 733
+        y: 11
+        width: 28
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4fc832c58397fc220800000000000000
+      internalID: 2508356800439618804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_57
+      rect:
+        serializedVersion: 2
+        x: 761
+        y: 11
+        width: 25
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be4a626725d46a6a0800000000000000
+      internalID: -6438373600714644245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_58
+      rect:
+        serializedVersion: 2
+        x: 795
+        y: 11
+        width: 17
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92243180657a209e0800000000000000
+      internalID: -1656577724974415319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_59
+      rect:
+        serializedVersion: 2
+        x: 1672
+        y: 1
+        width: 26
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d9f652f45abec530800000000000000
+      internalID: 3877241203218381269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_60
+      rect:
+        serializedVersion: 2
+        x: 1698
+        y: 11
+        width: 32
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19afd1a421d42c730800000000000000
+      internalID: 4017858558516132497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_61
+      rect:
+        serializedVersion: 2
+        x: 1729
+        y: 1
+        width: 28
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 981701f639a6b4060800000000000000
+      internalID: 6938756832350466441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_62
+      rect:
+        serializedVersion: 2
+        x: 1756
+        y: 11
+        width: 29
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78177dd76aac32a30800000000000000
+      internalID: 4189414894809346439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_63
+      rect:
+        serializedVersion: 2
+        x: 1784
+        y: 11
+        width: 31
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 554605310fd3095a0800000000000000
+      internalID: -6516640559479626667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_64
+      rect:
+        serializedVersion: 2
+        x: 1813
+        y: 11
+        width: 28
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3568a84b50cdbcf80800000000000000
+      internalID: -8085126788951669165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_65
+      rect:
+        serializedVersion: 2
+        x: 1841
+        y: 11
+        width: 25
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75fab8932749fbf90800000000000000
+      internalID: -6935661682814636201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TecladoPNG_66
+      rect:
+        serializedVersion: 2
+        x: 1875
+        y: 11
+        width: 27
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45cd3738ddb1fff50800000000000000
+      internalID: 6917278190871501908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      TecladoPNG_0: 3157601637324105667
+      TecladoPNG_1: -6867720321199017841
+      TecladoPNG_10: 6714367580133097481
+      TecladoPNG_11: 5865784602446532537
+      TecladoPNG_12: -1961159594887854732
+      TecladoPNG_13: -6593907397433284756
+      TecladoPNG_14: -1154839335241253410
+      TecladoPNG_15: -2263198870210545418
+      TecladoPNG_16: -5567483851580484099
+      TecladoPNG_17: 9025387616269673065
+      TecladoPNG_18: 2724371960348809080
+      TecladoPNG_19: -9197811876208812736
+      TecladoPNG_2: 6050299698810041479
+      TecladoPNG_20: -6413755309781452083
+      TecladoPNG_21: 29276720887512771
+      TecladoPNG_22: 7948839177963288820
+      TecladoPNG_23: -880360193042926441
+      TecladoPNG_24: 4504638151689320140
+      TecladoPNG_25: 7098769077220044942
+      TecladoPNG_26: 7929383691290643317
+      TecladoPNG_27: -6703747043242034320
+      TecladoPNG_28: 3967378730574090817
+      TecladoPNG_29: -7993764940315261980
+      TecladoPNG_3: 4791492669004342338
+      TecladoPNG_30: 384300028990967097
+      TecladoPNG_31: -9051835354315496860
+      TecladoPNG_32: 1936024314846675002
+      TecladoPNG_33: 4389087554806592734
+      TecladoPNG_34: -4210474048587643923
+      TecladoPNG_35: -864552080638488635
+      TecladoPNG_36: -603000360299125700
+      TecladoPNG_37: 8746382436903276875
+      TecladoPNG_38: -1775958298215723667
+      TecladoPNG_39: 3580583968282087540
+      TecladoPNG_4: -8250278438552513117
+      TecladoPNG_40: 3559859858616818053
+      TecladoPNG_41: 4614043065191272491
+      TecladoPNG_42: 189848289389558508
+      TecladoPNG_43: 4719270528766297820
+      TecladoPNG_44: 6615302224013111084
+      TecladoPNG_45: 6235301193391843607
+      TecladoPNG_46: 2579726655897097435
+      TecladoPNG_47: -3166189627333344802
+      TecladoPNG_48: 622525805758668751
+      TecladoPNG_49: -4106050924244669628
+      TecladoPNG_5: -8827571507780793443
+      TecladoPNG_50: -1292472205500599264
+      TecladoPNG_51: -6927326294909934165
+      TecladoPNG_52: -2568206316329758615
+      TecladoPNG_53: 8304354448073277747
+      TecladoPNG_54: 5313585505590272225
+      TecladoPNG_55: 99369128789375844
+      TecladoPNG_56: 2508356800439618804
+      TecladoPNG_57: -6438373600714644245
+      TecladoPNG_58: -1656577724974415319
+      TecladoPNG_59: 3877241203218381269
+      TecladoPNG_6: 4175176017179476093
+      TecladoPNG_60: 4017858558516132497
+      TecladoPNG_61: 6938756832350466441
+      TecladoPNG_62: 4189414894809346439
+      TecladoPNG_63: -6516640559479626667
+      TecladoPNG_64: -8085126788951669165
+      TecladoPNG_65: -6935661682814636201
+      TecladoPNG_66: 6917278190871501908
+      TecladoPNG_7: -8293081341262487580
+      TecladoPNG_8: -1138884886181198481
+      TecladoPNG_9: 6047449355623658640
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
