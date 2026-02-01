@@ -855,6 +855,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &440952272
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 440952273}
+  m_Layer: 0
+  m_Name: SpawnBlock
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &440952273
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 440952272}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.91, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1704690559}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &467991383
 GameObject:
   m_ObjectHideFlags: 0
@@ -2785,6 +2816,37 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &1783738410
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1783738411}
+  m_Layer: 0
+  m_Name: SpawnBlock
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1783738411
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1783738410}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.9, y: 0.3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1422077721}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1784287354
 GameObject:
   m_ObjectHideFlags: 0
@@ -3447,6 +3509,10 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6564721898488470875, guid: 5a7005d9e33d1d4e7a2d74347a4da0ac, type: 3}
+      propertyPath: blockTextPrefab
+      value: 
+      objectReference: {fileID: 4058746585120394883, guid: 01d8614a62071d846ac5738d36b1bcc7, type: 3}
+    - target: {fileID: 6564721898488470875, guid: 5a7005d9e33d1d4e7a2d74347a4da0ac, type: 3}
       propertyPath: blockStaminaCost
       value: 25
       objectReference: {fileID: 0}
@@ -3466,6 +3532,10 @@ PrefabInstance:
       propertyPath: useNewInputSystem
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6564721898488470875, guid: 5a7005d9e33d1d4e7a2d74347a4da0ac, type: 3}
+      propertyPath: blockTextSpawnPoint
+      value: 
+      objectReference: {fileID: 440952273}
     - target: {fileID: 6564721898488470875, guid: 5a7005d9e33d1d4e7a2d74347a4da0ac, type: 3}
       propertyPath: blockDamageReduction
       value: 1
@@ -3521,6 +3591,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5437383554676417708, guid: 5a7005d9e33d1d4e7a2d74347a4da0ac, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1576185904}
+    - targetCorrespondingSourceObject: {fileID: 5437383554676417708, guid: 5a7005d9e33d1d4e7a2d74347a4da0ac, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 440952273}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5661282005597506206, guid: 5a7005d9e33d1d4e7a2d74347a4da0ac, type: 3}
       insertIndex: -1
@@ -3629,6 +3702,10 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5406939474042176462, guid: 0670b58b363ca94358fd402e35c2f385, type: 3}
+      propertyPath: blockTextPrefab
+      value: 
+      objectReference: {fileID: 4058746585120394883, guid: 01d8614a62071d846ac5738d36b1bcc7, type: 3}
+    - target: {fileID: 5406939474042176462, guid: 0670b58b363ca94358fd402e35c2f385, type: 3}
       propertyPath: blockStaminaCost
       value: 25
       objectReference: {fileID: 0}
@@ -3644,6 +3721,10 @@ PrefabInstance:
       propertyPath: staminaRegenDelay
       value: 0.8
       objectReference: {fileID: 0}
+    - target: {fileID: 5406939474042176462, guid: 0670b58b363ca94358fd402e35c2f385, type: 3}
+      propertyPath: blockTextSpawnPoint
+      value: 
+      objectReference: {fileID: 1783738411}
     - target: {fileID: 5406939474042176462, guid: 0670b58b363ca94358fd402e35c2f385, type: 3}
       propertyPath: blockDamageReduction
       value: 1
@@ -3747,6 +3828,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6586139024102636089, guid: 0670b58b363ca94358fd402e35c2f385, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1487226660}
+    - targetCorrespondingSourceObject: {fileID: 6586139024102636089, guid: 0670b58b363ca94358fd402e35c2f385, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1783738411}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6810345308720141323, guid: 0670b58b363ca94358fd402e35c2f385, type: 3}
       insertIndex: -1

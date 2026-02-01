@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TomboPunch
+  m_Name: TomboWalking
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,9 +21,13 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 21300000, guid: a77a74ed83dac6d419a229eb4d48e78f, type: 3}
-    - time: 0.05
-      value: {fileID: 21300000, guid: a77a74ed83dac6d419a229eb4d48e78f, type: 3}
+      value: {fileID: 21300000, guid: cfeceefecfea3f844b1badd6fea51fbf, type: 3}
+    - time: 0.06666667
+      value: {fileID: 21300000, guid: 5d86c56f4fa688b4f9bdc1d25031cff5, type: 3}
+    - time: 0.16666667
+      value: {fileID: 21300000, guid: fd913d46069163d4a92fdd99134f4553, type: 3}
+    - time: 0.25
+      value: {fileID: 21300000, guid: 4ee0be505ee89814f9b2738196517517, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -46,14 +50,16 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 21300000, guid: a77a74ed83dac6d419a229eb4d48e78f, type: 3}
-    - {fileID: 21300000, guid: a77a74ed83dac6d419a229eb4d48e78f, type: 3}
+    - {fileID: 21300000, guid: cfeceefecfea3f844b1badd6fea51fbf, type: 3}
+    - {fileID: 21300000, guid: 5d86c56f4fa688b4f9bdc1d25031cff5, type: 3}
+    - {fileID: 21300000, guid: fd913d46069163d4a92fdd99134f4553, type: 3}
+    - {fileID: 21300000, guid: 4ee0be505ee89814f9b2738196517517, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.06666667
+    m_StopTime: 0.26666668
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
