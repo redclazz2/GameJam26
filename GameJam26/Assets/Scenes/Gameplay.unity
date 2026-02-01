@@ -2498,7 +2498,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7277471379267772093, guid: 5a7005d9e33d1d4e7a2d74347a4da0ac, type: 3}
       propertyPath: meleeAttackCooldownDefault
-      value: 0.32
+      value: 0.28
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 851974620297323732, guid: 5a7005d9e33d1d4e7a2d74347a4da0ac, type: 3}
@@ -2667,7 +2667,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8425417611615109160, guid: 0670b58b363ca94358fd402e35c2f385, type: 3}
       propertyPath: meleeAttackCooldownDefault
-      value: 0.32
+      value: 0.28
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1999896630635543105, guid: 0670b58b363ca94358fd402e35c2f385, type: 3}

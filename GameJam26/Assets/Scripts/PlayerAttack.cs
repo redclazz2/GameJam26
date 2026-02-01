@@ -84,20 +84,26 @@ public class PlayerAttack : MonoBehaviour
             SpawnUpAttack();
             return;
         }
-
-        // 💥 DOUBLE TAP
-        if (Time.time - lastAttackTapTime <= doubleTapAttackTime)
+        // PRIMER TAP
+        if (!waitingForSecondTap)
         {
-            SpawnLongAttack();
-            lastAttackTapTime = 0f;
+            waitingForSecondTap = true;
+            lastAttackTapTime = Time.time;
             return;
         }
 
-        // 💥 INSTANT BASIC ATTACK
-        SpawnMeleeAttack();
-        lastAttackTapTime = Time.time;
+        // SEGUNDO TAP
+        if (Time.time - lastAttackTapTime <= doubleTapAttackTime)
+        {
+            waitingForSecondTap = false;
+            SpawnLongAttack();
+        }
+        if (waitingForSecondTap && Time.time - lastAttackTapTime > doubleTapAttackTime)
+        {
+            waitingForSecondTap = false;
+            SpawnMeleeAttack();
+        }
     }
-
 
     private void ResolveSingleTap()
     {
