@@ -68,7 +68,7 @@ public class TwoPlayerSelectionManager : MonoBehaviour
     private bool p2Ready = false;
     private PlayerTurn currentTurn = PlayerTurn.Player1;
     
-    private List<CharacterSlot> characterSlots = new List<CharacterSlot>();
+    private List<TwoPlayerCharacterSlot> characterSlots = new List<TwoPlayerCharacterSlot>();
     
     // Personajes seleccionados (estáticos para acceder desde otras escenas)
     public static CharacterData Player1Character { get; private set; }
@@ -142,7 +142,7 @@ public class TwoPlayerSelectionManager : MonoBehaviour
         for (int i = 0; i < availableCharacters.Count; i++)
         {
             GameObject slotObj = Instantiate(characterSlotPrefab, characterGridContainer);
-            CharacterSlot slot = slotObj.GetComponent<CharacterSlot>();
+            TwoPlayerCharacterSlot slot = slotObj.GetComponent<TwoPlayerCharacterSlot>();
             
             if (slot != null)
             {
