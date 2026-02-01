@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public enum FacingDirection
 {
@@ -22,6 +23,14 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+
+    [Header("UI Feedback")]
+    [SerializeField] private GameObject blockTextPrefab; // Prefab del texto "Bloqueado"
+    [SerializeField] private Transform blockTextSpawnPoint; // Punto donde aparece el texto (encima de la cabeza)
+    [SerializeField] private float blockTextDuration = 1f;
+    [SerializeField] private float blockTextShakeIntensity = 0.05f; // Intensidad del temblor
+    [SerializeField] private float blockTextShakeSpeed = 50f; // Velocidad del temblor
+    [SerializeField] private float blockTextRiseSpeed = 1f; // Velocidad de subida
 
     [Header("Stats")]
     [SerializeField] private float health = 100f;
@@ -678,6 +687,9 @@ public class Player : MonoBehaviour
             // Iniciar block stun
             StartCoroutine(BlockStunCoroutine());
             
+            // Mostrar texto "Bloqueado"
+            StartCoroutine(ShowBlockTextCoroutine());
+            
             Debug.Log($"{gameObject.name} bloqueó! Daño reducido: {damage} -> {finalDamage}");
         }
 
@@ -775,6 +787,77 @@ public class Player : MonoBehaviour
             spriteRenderer.color = Color.white;
             isInDamageFlash = false;
         }
+    }
+
+    /// <summary>
+    /// Corrutina que muestra el texto "Bloqueado" con temblor, subida y fade out
+    /// </summary>
+    private System.Collections.IEnumerator ShowBlockTextCoroutine()
+    {
+        if (blockTextPrefab == null) yield break;
+        
+        // Determinar posición de spawn
+        Vector3 spawnPos = blockTextSpawnPoint != null 
+            ? blockTextSpawnPoint.position 
+            : transform.position + Vector3.up * 1.5f;
+        
+        // Instanciar el texto (no como hijo para que no se voltee con el personaje)
+        GameObject textInstance = Instantiate(blockTextPrefab, spawnPos, Quaternion.identity);
+        
+        // Obtener componentes para el fade
+        SpriteRenderer textSprite = textInstance.GetComponent<SpriteRenderer>();
+        TMPro.TextMeshPro textTMP = textInstance.GetComponent<TMPro.TextMeshPro>();
+        TMPro.TextMeshProUGUI textTMPUI = textInstance.GetComponentInChildren<TMPro.TextMeshProUGUI>();
+        CanvasGroup canvasGroup = textInstance.GetComponent<CanvasGroup>();
+        
+        Vector3 startPos = textInstance.transform.position;
+        float elapsed = 0f;
+        
+        while (elapsed < blockTextDuration)
+        {
+            elapsed += Time.deltaTime;
+            float progress = elapsed / blockTextDuration;
+            
+            // Subir gradualmente
+            float riseOffset = elapsed * blockTextRiseSpeed;
+            
+            // Efecto de temblor
+            float shakeX = Mathf.Sin(Time.time * blockTextShakeSpeed) * blockTextShakeIntensity * (1f - progress);
+            float shakeY = Mathf.Cos(Time.time * blockTextShakeSpeed * 1.3f) * blockTextShakeIntensity * (1f - progress);
+            
+            textInstance.transform.position = startPos + new Vector3(shakeX, riseOffset + shakeY, 0);
+            
+            // Fade out (alpha de 1 a 0)
+            float alpha = 1f - progress;
+            
+            if (textSprite != null)
+            {
+                Color c = textSprite.color;
+                c.a = alpha;
+                textSprite.color = c;
+            }
+            if (textTMP != null)
+            {
+                Color c = textTMP.color;
+                c.a = alpha;
+                textTMP.color = c;
+            }
+            if (textTMPUI != null)
+            {
+                Color c = textTMPUI.color;
+                c.a = alpha;
+                textTMPUI.color = c;
+            }
+            if (canvasGroup != null)
+            {
+                canvasGroup.alpha = alpha;
+            }
+            
+            yield return null;
+        }
+        
+        // Destruir la instancia
+        Destroy(textInstance);
     }
 
     /// <summary>

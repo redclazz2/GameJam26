@@ -717,6 +717,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &284529359
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 284529360}
+  m_Layer: 0
+  m_Name: SpawnBlock
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &284529360
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284529359}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.66, y: 2.31, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1704690559}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &291700728
 GameObject:
   m_ObjectHideFlags: 0
@@ -1757,6 +1788,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1117195378}
   m_CullTransparentMesh: 1
+--- !u!1 &1129090984
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1129090985}
+  m_Layer: 0
+  m_Name: SpawnBlock
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1129090985
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129090984}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.4, y: 0.9, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1422077721}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1257679630
 GameObject:
   m_ObjectHideFlags: 0
@@ -3317,6 +3379,10 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6564721898488470875, guid: 5a7005d9e33d1d4e7a2d74347a4da0ac, type: 3}
+      propertyPath: blockTextPrefab
+      value: 
+      objectReference: {fileID: 4058746585120394883, guid: 01d8614a62071d846ac5738d36b1bcc7, type: 3}
+    - target: {fileID: 6564721898488470875, guid: 5a7005d9e33d1d4e7a2d74347a4da0ac, type: 3}
       propertyPath: blockStaminaCost
       value: 25
       objectReference: {fileID: 0}
@@ -3336,6 +3402,10 @@ PrefabInstance:
       propertyPath: useNewInputSystem
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6564721898488470875, guid: 5a7005d9e33d1d4e7a2d74347a4da0ac, type: 3}
+      propertyPath: blockTextSpawnPoint
+      value: 
+      objectReference: {fileID: 284529360}
     - target: {fileID: 6564721898488470875, guid: 5a7005d9e33d1d4e7a2d74347a4da0ac, type: 3}
       propertyPath: blockDamageReduction
       value: 1
@@ -3391,6 +3461,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5437383554676417708, guid: 5a7005d9e33d1d4e7a2d74347a4da0ac, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1576185904}
+    - targetCorrespondingSourceObject: {fileID: 5437383554676417708, guid: 5a7005d9e33d1d4e7a2d74347a4da0ac, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 284529360}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5661282005597506206, guid: 5a7005d9e33d1d4e7a2d74347a4da0ac, type: 3}
       insertIndex: -1
@@ -3491,6 +3564,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5406939474042176462, guid: 0670b58b363ca94358fd402e35c2f385, type: 3}
+      propertyPath: blockText
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5406939474042176462, guid: 0670b58b363ca94358fd402e35c2f385, type: 3}
       propertyPath: headCheck
       value: 
       objectReference: {fileID: 1487226660}
@@ -3498,6 +3575,10 @@ PrefabInstance:
       propertyPath: knockbackForce
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 5406939474042176462, guid: 0670b58b363ca94358fd402e35c2f385, type: 3}
+      propertyPath: blockTextPrefab
+      value: 
+      objectReference: {fileID: 4058746585120394883, guid: 01d8614a62071d846ac5738d36b1bcc7, type: 3}
     - target: {fileID: 5406939474042176462, guid: 0670b58b363ca94358fd402e35c2f385, type: 3}
       propertyPath: blockStaminaCost
       value: 25
@@ -3514,6 +3595,10 @@ PrefabInstance:
       propertyPath: staminaRegenDelay
       value: 0.8
       objectReference: {fileID: 0}
+    - target: {fileID: 5406939474042176462, guid: 0670b58b363ca94358fd402e35c2f385, type: 3}
+      propertyPath: blockTextSpawnPoint
+      value: 
+      objectReference: {fileID: 1129090985}
     - target: {fileID: 5406939474042176462, guid: 0670b58b363ca94358fd402e35c2f385, type: 3}
       propertyPath: blockDamageReduction
       value: 1
@@ -3602,6 +3687,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Matachin
       objectReference: {fileID: 0}
+    - target: {fileID: 6810345308720141323, guid: 0670b58b363ca94358fd402e35c2f385, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8425417611615109160, guid: 0670b58b363ca94358fd402e35c2f385, type: 3}
       propertyPath: attackDuration
       value: 0.15
@@ -3617,6 +3706,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6586139024102636089, guid: 0670b58b363ca94358fd402e35c2f385, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1487226660}
+    - targetCorrespondingSourceObject: {fileID: 6586139024102636089, guid: 0670b58b363ca94358fd402e35c2f385, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1129090985}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6810345308720141323, guid: 0670b58b363ca94358fd402e35c2f385, type: 3}
       insertIndex: -1
