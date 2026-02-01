@@ -11,6 +11,7 @@ public class PlayerAttack : MonoBehaviour
 
     [Header("Advanced Attack Settings")]
     [SerializeField] private float doubleTapAttackTime = 0.25f;
+    [SerializeField] private float upAttackHorizontalOffSet = 2f;
 
     [Header("Input System")]
     [SerializeField] private bool useNewInputSystem = true;
@@ -136,7 +137,7 @@ public class PlayerAttack : MonoBehaviour
         
         float direction = playerComponent.FacingDirection;
         Vector3 spawnPosition = new Vector3(
-            playerTransform.position.x + 2f * direction,
+            playerTransform.position.x + upAttackHorizontalOffSet * direction,
             playerTransform.position.y + 3f,
             playerTransform.position.z
         );
