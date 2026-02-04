@@ -1294,7 +1294,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: 0.19476318}
+  m_AnchoredPosition: {x: 0, y: 0.19476318}
   m_SizeDelta: {x: 81.978, y: 46.113}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &435306227
@@ -2437,7 +2437,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: caefea392fc2a2db3bcc64f87aea540b, type: 3}
+  m_Resource: {fileID: 8300000, guid: 881dcde2d6549ba49b54e3554db84551, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -4753,6 +4753,10 @@ PrefabInstance:
       value: 8.5
       objectReference: {fileID: 0}
     - target: {fileID: 6564721898488470875, guid: 5a7005d9e33d1d4e7a2d74347a4da0ac, type: 3}
+      propertyPath: maxStamina
+      value: 115
+      objectReference: {fileID: 0}
+    - target: {fileID: 6564721898488470875, guid: 5a7005d9e33d1d4e7a2d74347a4da0ac, type: 3}
       propertyPath: dashCooldown
       value: 0.3
       objectReference: {fileID: 0}
@@ -4770,7 +4774,7 @@ PrefabInstance:
       objectReference: {fileID: 4058746585120394883, guid: 01d8614a62071d846ac5738d36b1bcc7, type: 3}
     - target: {fileID: 6564721898488470875, guid: 5a7005d9e33d1d4e7a2d74347a4da0ac, type: 3}
       propertyPath: blockStaminaCost
-      value: 25
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6564721898488470875, guid: 5a7005d9e33d1d4e7a2d74347a4da0ac, type: 3}
       propertyPath: staminaRegenRate
@@ -4778,7 +4782,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6564721898488470875, guid: 5a7005d9e33d1d4e7a2d74347a4da0ac, type: 3}
       propertyPath: attackStaminaCost
-      value: 16
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 6564721898488470875, guid: 5a7005d9e33d1d4e7a2d74347a4da0ac, type: 3}
       propertyPath: staminaRegenDelay
@@ -4816,6 +4820,10 @@ PrefabInstance:
       propertyPath: blockPushbackToAttacker
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 6564721898488470875, guid: 5a7005d9e33d1d4e7a2d74347a4da0ac, type: 3}
+      propertyPath: blockingStaminaDrainRate
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6660862722859020698, guid: 5a7005d9e33d1d4e7a2d74347a4da0ac, type: 3}
       propertyPath: m_Size.x
       value: 7.7567196
@@ -4846,7 +4854,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7277471379267772093, guid: 5a7005d9e33d1d4e7a2d74347a4da0ac, type: 3}
       propertyPath: meleeAttackCooldownDefault
-      value: 0.28
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 851974620297323732, guid: 5a7005d9e33d1d4e7a2d74347a4da0ac, type: 3}
@@ -4970,6 +4978,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1487226660}
     - target: {fileID: 5406939474042176462, guid: 0670b58b363ca94358fd402e35c2f385, type: 3}
+      propertyPath: maxStamina
+      value: 115
+      objectReference: {fileID: 0}
+    - target: {fileID: 5406939474042176462, guid: 0670b58b363ca94358fd402e35c2f385, type: 3}
       propertyPath: knockbackForce
       value: 20
       objectReference: {fileID: 0}
@@ -4979,7 +4991,7 @@ PrefabInstance:
       objectReference: {fileID: 4058746585120394883, guid: 01d8614a62071d846ac5738d36b1bcc7, type: 3}
     - target: {fileID: 5406939474042176462, guid: 0670b58b363ca94358fd402e35c2f385, type: 3}
       propertyPath: blockStaminaCost
-      value: 25
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5406939474042176462, guid: 0670b58b363ca94358fd402e35c2f385, type: 3}
       propertyPath: staminaRegenRate
@@ -4987,7 +4999,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5406939474042176462, guid: 0670b58b363ca94358fd402e35c2f385, type: 3}
       propertyPath: attackStaminaCost
-      value: 16
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 5406939474042176462, guid: 0670b58b363ca94358fd402e35c2f385, type: 3}
       propertyPath: staminaRegenDelay
@@ -5099,7 +5111,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8425417611615109160, guid: 0670b58b363ca94358fd402e35c2f385, type: 3}
       propertyPath: meleeAttackCooldownDefault
-      value: 0.28
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1999896630635543105, guid: 0670b58b363ca94358fd402e35c2f385, type: 3}
